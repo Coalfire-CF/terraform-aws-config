@@ -1,4 +1,4 @@
-# ACE-ToolingTemplate
+# ACE-AWS-Config
 
 Template repository for AWS Config deployment in AWS GovCloud
 
