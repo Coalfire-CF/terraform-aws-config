@@ -57,8 +57,8 @@ Code updates ideally are limited in scope to address one enhancement or bug fix 
 
 #### **Code Owners**
 
-- Primary Code owner: Douglas Francis (@douglas-f)
-- Backup Code owner: James Westbrook (@i-ate-a-vm)
+- Primary Code owner: Kourosh Mobl (@kourosh-forti-hands)
+- Backup Code owner: Douglas Francis (@douglas-f)
 
 The responsibility of the code owners is to approve and Merge PR's on the repository, and generally manage and direct issue discussions.
 
