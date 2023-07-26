@@ -5,7 +5,7 @@ Template repository for AWS Config deployment in AWS GovCloud
 ## Description
 
 - Cloud(s) supported: Government/Commercial
-- Product Version/License:
+- Product Version/License: N/A
 - FedRAMP Compliance Support: FR MOD/High
 
 ### Code Owners
