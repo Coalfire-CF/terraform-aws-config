@@ -1,4 +1,8 @@
-# ACE-AWS-Config
+<div align="center">
+<img src="coalfire_logo.png" width="200">
+</div>
+
+# AWS Config Terraform Module
 
 Template repository for AWS Config deployment in AWS GovCloud
 
@@ -6,14 +10,43 @@ Template repository for AWS Config deployment in AWS GovCloud
 
 - Cloud(s) supported: Government/Commercial
 - Product Version/License: N/A
-- FedRAMP Compliance Support: FR MOD/High
+- FedRAMP Compliance Support: FedRAMP Moderate, High
 
-### Code Owners
+## Dependencies
 
-- Primary Code owner: Kourosh Mobl (@kourosh-forti-hands)
-- Backup Code owner: Douglas Francis (@douglas-f)
+- Account setup
 
-The responsibility of the code owners is to approve and Merge PR's on the repository, and generally manage and direct issue discussions.
+## Resource List
+
+The resources created from this module include:
+
+- AWS Config Configuration Recorder
+- AWS Config Delivery Channel
+- IAM role and policy
+- S3 bucket and bucket policy
+
+## Code Updates
+
+No code updates.
+
+## Usage
+
+This module can be called as outlined below:
+
+- Change directories to the `terraform-aws-config` directory.
+- From the `terraform-aws-config` directory run `terraform init`.
+- Run `terraform plan` to review the resources being created.
+- If everything looks correct in the plan output, run `terraform apply`.
+
+```hcl
+module "aws_config" {
+    source = "github.com/Coalfire-CF/terraform-aws-config"
+
+    aws_region = "us-central-1"
+    bucket_name = "your-bucket-name"
+    resource_prefix = "your-resource-prefix"
+}
+```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
