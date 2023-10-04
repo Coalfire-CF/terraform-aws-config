@@ -13,10 +13,6 @@ variable "default_aws_region" {
   type        = string
 }
 
-variable "bucket_name" {
-  description = "The AWS Config S3 bucket"
-  type        = string
-}
 
 variable "resource_prefix" {
   description = "The prefix for the s3 bucket names"
