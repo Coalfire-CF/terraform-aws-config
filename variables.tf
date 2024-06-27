@@ -24,10 +24,6 @@ variable "is_enabled" {
   type        = bool
 }
 
-terraform {
-  experiments = [module_variable_optional_attrs]
-}
-
 variable "recording_groups" {
   description = "whether AWS Config records configuration changes for every supported type of regional resource or Specifies whether AWS Config includes all supported types of global resources with the resources that it records."
   default     = []
