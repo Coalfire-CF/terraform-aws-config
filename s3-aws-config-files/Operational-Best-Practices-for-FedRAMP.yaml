@@ -1021,6 +1021,16 @@ Resources:
         Owner: AWS
         SourceIdentifier: NO_UNRESTRICTED_ROUTE_TO_IGW
     Type: AWS::Config::ConfigRule
+  OpensearchLogsToCloudwatch:
+    Properties:
+      ConfigRuleName: opensearch-logs-to-cloudwatch
+      Scope:
+        ComplianceResourceTypes:
+          - AWS::OpenSearch::Domain
+      Source:
+        Owner: AWS
+        SourceIdentifier: OPENSEARCH_LOGS_TO_CLOUDWATCH
+    Type: AWS::Config::ConfigRule
   RdsEnhancedMonitoringEnabled:
     Properties:
       ConfigRuleName: rds-enhanced-monitoring-enabled

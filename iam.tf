@@ -58,3 +58,13 @@ resource "aws_iam_role_policy_attachment" "config_role_attachment" {
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWS_ConfigRole"
 }
+
+resource "aws_iam_role_policy_attachment" "config_role_attachment" {
+  role       = aws_iam_role.custom_aws_config_role.name
+  policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWS_Config_Role"
+}
+
+resource "aws_iam_role_policy_attachment" "config_role_attachment" {
+  role       = aws_iam_role.custom_aws_config_role.name
+  policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWSConfigRole"
+}
