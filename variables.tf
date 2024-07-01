@@ -24,10 +24,36 @@ variable "is_enabled" {
   type        = bool
 }
 
+variable "s3_config_arn" {
+  description = "S3 Bucket ARN for AWS Config"
+  type        = string
+}
+
+variable "s3_config_name" {
+  description = "S3 bucket name for AWS Config"
+  type        = string
+}
+
+variable "s3_config_id" {
+  description = "S3 bucket ID for AWS Config"
+  type        = string
+}
+
+variable "packs_s3_key" {
+  description = "S3 Bucket prefix for the Packs uploaded"
+  type        = string
+  default     = "/packs"
+}
+
+variable "config_kms_key_arn" {
+  description = "AWS Config KMS Key Arn"
+  type        = string
+}
+
 variable "recording_groups" {
   description = "whether AWS Config records configuration changes for every supported type of regional resource or Specifies whether AWS Config includes all supported types of global resources with the resources that it records."
   default     = []
-  type        = list(object({
+  type = list(object({
     all_supported                 = bool
     include_global_resource_types = bool
     resource_types                = optional(list(string))
@@ -46,3 +72,16 @@ variable "delivery_frequency" {
     error_message = "Valid values for var: test_variable are (One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours)."
   }
 }
+
+variable "conformance_pack_names" {
+  description = "A list of conformance pack names to be deployed"
+  type        = list(string)
+}
+
+# variable "conformance_packs" {
+#   description = "A list of conformance packs to create"
+#   type = list(object({
+#     name          = string
+#     template_path = string
+#   }))
+# }

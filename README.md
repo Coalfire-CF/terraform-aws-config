@@ -14,6 +14,7 @@
 - S3 bucket 
 
 ## Code Updates
+- Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
 
 ## Deployment Steps
 
