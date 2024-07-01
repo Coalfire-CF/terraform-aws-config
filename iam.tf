@@ -54,17 +54,17 @@ resource "aws_iam_role_policy" "kms_config_role_policy" {
   policy = data.aws_iam_policy_document.kms_role_policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "config_role_attachment" {
+resource "aws_iam_role_policy_attachment" "config_role_attachment1" {
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWS_ConfigRole"
 }
 
-resource "aws_iam_role_policy_attachment" "config_role_attachment" {
+resource "aws_iam_role_policy_attachment" "config_role_attachment2" {
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWS_Config_Role"
 }
 
-resource "aws_iam_role_policy_attachment" "config_role_attachment" {
+resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWSConfigRole"
 }
