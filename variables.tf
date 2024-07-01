@@ -51,6 +51,11 @@ variable "s3_kms_key_arn" {
   type        = string
 }
 
+variable "sns_kms_key_id" {
+  description = "SNS KMS key ID"
+  type        = string
+}
+
 # variable "recording_groups" {
 #   description = "whether AWS Config records configuration changes for every supported type of regional resource or Specifies whether AWS Config includes all supported types of global resources with the resources that it records."
 #   default     = []

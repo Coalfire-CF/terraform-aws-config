@@ -9,10 +9,16 @@ resource "aws_config_configuration_recorder" "config" {
 
 }
 
+resource "aws_sns_topic" "config_delivery" {
+  name              = "${var.resource_prefix}-sns-config"
+  kms_master_key_id = var.sns_kms_key_id
+}
+
 
 resource "aws_config_delivery_channel" "config" {
   name           = "${var.resource_prefix}-config-delivery"
   s3_bucket_name = var.s3_config_id
+  sns_topic_arn  = aws_sns_topic.config_delivery.arn
 
   snapshot_delivery_properties {
     delivery_frequency = var.delivery_frequency
