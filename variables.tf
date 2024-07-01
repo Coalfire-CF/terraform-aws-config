@@ -1,11 +1,11 @@
 variable "aws_regions" {
   description = "The AWS region(s) for AWS Config Aggregator"
-  type        = string
+  type        = list(string)
 }
 
 variable "account_ids" {
   description = "AWS Account IDs for AWS Config Aggregator"
-  type        = string
+  type        = list(string)
 }
 
 variable "resource_prefix" {

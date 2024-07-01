@@ -49,6 +49,6 @@ resource "aws_iam_role" "aggregator_organization" {
 }
 
 resource "aws_iam_role_policy_attachment" "aggregator_organization" {
-  role       = aws_iam_role.aggregator_organization.name
+  role       = aws_iam_role.aggregator_organization[0].name
   policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
 }
