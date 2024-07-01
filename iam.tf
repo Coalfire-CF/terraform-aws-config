@@ -28,7 +28,9 @@ data "aws_iam_policy_document" "kms_role_policy" {
     actions = ["kms:*"]
     resources = [
       var.config_kms_key_arn,
-      "${var.config_kms_key_arn}/*"
+      "${var.config_kms_key_arn}/*",
+      var.s3_kms_key_arn,
+      "${var.s3_kms_key_arn}/*"
     ]
   }
 }
