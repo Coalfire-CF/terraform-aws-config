@@ -7,7 +7,7 @@ resource "aws_config_configuration_aggregator" "config_aggregator" {
   count = var.aggregation_type == "organization" ? 1 : 0
 
   organization_aggregation_source {
-    role_arn    = aws_iam_role.aggregator_organization.arn
+    role_arn    = aws_iam_role.aggregator_organization[0].arn
     regions     = var.aws_regions
     all_regions = false
   }
