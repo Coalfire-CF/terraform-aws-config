@@ -9,10 +9,6 @@ resource "aws_config_configuration_recorder" "config" {
 
 }
 
-resource "aws_config_configuration_recorder_status" "config" {
-  name       = aws_config_configuration_recorder.config.name
-  is_enabled = true
-}
 
 resource "aws_config_delivery_channel" "config" {
   name           = "${var.resource_prefix}-config-delivery"
@@ -22,7 +18,13 @@ resource "aws_config_delivery_channel" "config" {
     delivery_frequency = var.delivery_frequency
   }
 
-  depends_on = [aws_config_configuration_recorder.config]
+}
+
+resource "aws_config_configuration_recorder_status" "config" {
+  name       = aws_config_configuration_recorder.config.name
+  is_enabled = true
+
+  depends_on = [aws_config_delivery_channel.config]
 }
 
 resource "aws_config_conformance_pack" "conformance_packs" {
