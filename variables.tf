@@ -38,7 +38,7 @@ variable "s3_config_id" {
 variable "packs_s3_key" {
   description = "S3 Bucket prefix for the Packs uploaded"
   type        = string
-  default     = "/packs"
+  default     = "packs"
 }
 
 variable "config_kms_key_arn" {
