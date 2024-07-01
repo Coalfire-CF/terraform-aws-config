@@ -61,7 +61,7 @@ resource "aws_iam_role_policy_attachment" "config_role_attachment1" {
 
 resource "aws_iam_role_policy_attachment" "config_role_attachment2" {
   role       = aws_iam_role.custom_aws_config_role.name
-  policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWS_Config_Role"
+  policy_arn = "arn:aws-us-gov:iam::aws:policy/AWS_Config_Role"
 }
 
 resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
