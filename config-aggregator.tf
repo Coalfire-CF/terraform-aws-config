@@ -42,6 +42,8 @@ data "aws_iam_policy_document" "aggregator_assume_role" {
 }
 
 resource "aws_iam_role" "aggregator_organization" {
+  count = var.aggregation_type == "organization" ? 1 : 0
+
   name               = "AWSConfigAggregatorRole"
   assume_role_policy = data.aws_iam_policy_document.aggregator_assume_role.json
 }
