@@ -1,18 +1,12 @@
-# variable "kms_s3_arn" {
-#   description = "KMS arn for S3"
-#   type        = string
-# }
+variable "aws_regions" {
+  description = "The AWS region(s) for AWS Config Aggregator"
+  type        = string
+}
 
-# variable "aws_region" {
-#   description = "The AWS region to create things in"
-#   type        = string
-# }
-
-# variable "default_aws_region" {
-#   description = "The default AWS region to create resources in"
-#   type        = string
-# }
-
+variable "account_ids" {
+  description = "AWS Account IDs for AWS Config Aggregator"
+  type        = string
+}
 
 variable "resource_prefix" {
   description = "The prefix for the s3 bucket names"
@@ -83,10 +77,14 @@ variable "conformance_pack_names" {
   type        = list(string)
 }
 
-# variable "conformance_packs" {
-#   description = "A list of conformance packs to create"
-#   type = list(object({
-#     name          = string
-#     template_path = string
-#   }))
-# }
+## Aggregator Variables ##
+variable "aggregation_type" {
+  description = "Aggregation Type"
+  type        = string
+  validation {
+    condition = contains([
+      "account", "organization"
+    ], var.aggregation_type)
+    error_message = "Valid values for var: account or organization."
+  }
+}
