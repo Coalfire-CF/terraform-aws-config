@@ -1,17 +1,17 @@
-variable "kms_s3_arn" {
-  description = "KMS arn for S3"
-  type        = string
-}
+# variable "kms_s3_arn" {
+#   description = "KMS arn for S3"
+#   type        = string
+# }
 
-variable "aws_region" {
-  description = "The AWS region to create things in"
-  type        = string
-}
+# variable "aws_region" {
+#   description = "The AWS region to create things in"
+#   type        = string
+# }
 
-variable "default_aws_region" {
-  description = "The default AWS region to create resources in"
-  type        = string
-}
+# variable "default_aws_region" {
+#   description = "The default AWS region to create resources in"
+#   type        = string
+# }
 
 
 variable "resource_prefix" {
@@ -26,11 +26,6 @@ variable "is_enabled" {
 
 variable "s3_config_arn" {
   description = "S3 Bucket ARN for AWS Config"
-  type        = string
-}
-
-variable "s3_config_name" {
-  description = "S3 bucket name for AWS Config"
   type        = string
 }
 
