@@ -1,17 +1,17 @@
 ![Coalfire](coalfire_logo.png)
 
-
 # AWS Config Terraform Module
 
 ## Dependencies
-- Account Setup
-- Security Core
+- (Account Setup module)[]
 
 ## Resource List
 - AWS Config Recorder
-- AWS Config Delivery Channel
+- AWS Config Delivery Channel (S3 + SNS)
 - AWS IAM policies
-- S3 bucket 
+- AWS Config Aggregator (Account or Organization)
+- Uploads S3 Object(s) to X bucket for the Config Conformance Packs
+- Config Conformance Packs x2 (Operational-Best-Practices-for-FedRAMP and Operational-Best-Practices-for-NIST-800-53-rev-5)
 
 ## Code Updates
 - Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)

@@ -14,7 +14,6 @@ resource "aws_sns_topic" "config_delivery" {
   kms_master_key_id = var.sns_kms_key_id
 }
 
-
 resource "aws_config_delivery_channel" "config" {
   name           = "${var.resource_prefix}-config-delivery"
   s3_bucket_name = var.s3_config_id
