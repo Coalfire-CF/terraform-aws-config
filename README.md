@@ -1,6 +1,6 @@
-![Coalfire](coalfire_logo.png)
-
 # AWS Config Terraform Module
+
+![Coalfire](coalfire_logo.png)
 
 ## Dependencies
 - [Account Setup module](https://github.com/Coalfire-CF/terraform-aws-account-setup)
