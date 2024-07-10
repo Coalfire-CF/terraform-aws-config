@@ -31,13 +31,6 @@ This module can be called as outlined below.
 Include example for how to call the module below with generic variables
 
 ```hcl
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-}
 
 module "config" {
   source = "github.com/Coalfire-CF/terraform-aws-config"
