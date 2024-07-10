@@ -11,7 +11,7 @@
 - AWS IAM policies
 - AWS Config Aggregator (Account or Organization)
 - Uploads S3 Object(s) to X bucket for the Config Conformance Packs
-- Config Conformance Packs x2 (Operational-Best-Practices-for-FedRAMP and Operational-Best-Practices-for-NIST-800-53-rev-5) Modified from source [Github](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
+- Config Conformance Packs x2: [Operational-Best-Practices-for-FedRAMP](https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-fedramp-moderate.html) and [Operational-Best-Practices-for-NIST-800-53-rev-5](https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-nist-800-53_rev_5.html) Modified from source [Github](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
 
 ## Code Updates
 - Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
