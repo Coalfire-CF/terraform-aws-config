@@ -3,7 +3,7 @@
 # AWS Config Terraform Module
 
 ## Dependencies
-- (Account Setup module)[https://github.com/Coalfire-CF/terraform-aws-account-setup]
+- [Account Setup module](https://github.com/Coalfire-CF/terraform-aws-account-setup)
 
 ## Resource List
 - AWS Config Recorder
@@ -11,7 +11,7 @@
 - AWS IAM policies
 - AWS Config Aggregator (Account or Organization)
 - Uploads S3 Object(s) to X bucket for the Config Conformance Packs
-- Config Conformance Packs x2 (Operational-Best-Practices-for-FedRAMP and Operational-Best-Practices-for-NIST-800-53-rev-5) Modified from source (Github)[https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs]
+- Config Conformance Packs x2 (Operational-Best-Practices-for-FedRAMP and Operational-Best-Practices-for-NIST-800-53-rev-5) Modified from source [Github](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
 
 ## Code Updates
 - Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
@@ -43,11 +43,11 @@ module "config" {
   source = "github.com/Coalfire-CF/terraform-aws-config"
 
   resource_prefix        = var.resource_prefix
-  s3_config_arn          = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_config_arn
-  s3_config_id           = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_config_id
-  config_kms_key_arn     = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.config_kms_key_arn
-  s3_kms_key_arn         = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_kms_key_arn
-  sns_kms_key_id         = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.sns_kms_key_id
+  s3_config_arn          = data.terraform_remote_state.mgmt_account_setup.outputs.s3_config_arn
+  s3_config_id           = data.terraform_remote_state.mgmt_account_setup.outputs.s3_config_id
+  config_kms_key_arn     = data.terraform_remote_state.mgmt_account_setup.outputs.config_kms_key_arn
+  s3_kms_key_arn         = data.terraform_remote_state.mgmt_account_setup.outputs.s3_kms_key_arn
+  sns_kms_key_id         = data.terraform_remote_state.mgmt_account_setup.outputs.sns_kms_key_id
   conformance_pack_names = ["Operational-Best-Practices-for-FedRAMP", "Operational-Best-Practices-for-NIST-800-53-rev-5"]
   delivery_frequency     = "TwentyFour_Hours"
 
