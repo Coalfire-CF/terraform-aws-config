@@ -3,7 +3,7 @@
 # AWS Config Terraform Module
 
 ## Dependencies
-- (Account Setup module)[]
+- (Account Setup module)[https://github.com/Coalfire-CF/terraform-aws-account-setup]
 
 ## Resource List
 - AWS Config Recorder
@@ -15,6 +15,7 @@
 
 ## Code Updates
 - Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
+- Due to the nature of this Github repository being opensource there are a few rules out of the box that were removed in order to get this module to properly scan the AWS Accounts
 
 ## Deployment Steps
 
