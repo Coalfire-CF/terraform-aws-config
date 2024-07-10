@@ -50,16 +50,6 @@ variable "sns_kms_key_id" {
   type        = string
 }
 
-# variable "recording_groups" {
-#   description = "whether AWS Config records configuration changes for every supported type of regional resource or Specifies whether AWS Config includes all supported types of global resources with the resources that it records."
-#   default     = []
-#   type = list(object({
-#     all_supported                 = bool
-#     include_global_resource_types = bool
-#     resource_types                = optional(list(string))
-#   }))
-# }
-
 variable "delivery_frequency" {
   type        = string
   description = "frequency for the config snapshots to be sent to S3"
