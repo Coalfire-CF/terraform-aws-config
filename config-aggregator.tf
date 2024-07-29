@@ -9,7 +9,7 @@ resource "aws_config_configuration_aggregator" "config_aggregator" {
   organization_aggregation_source {
     role_arn    = aws_iam_role.aggregator_organization[0].arn
     regions     = var.aws_regions
-    all_regions = false
+    all_regions = var.all_regions
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_config_configuration_aggregator" "account_config_aggregator" {
   account_aggregation_source {
     account_ids = var.account_ids
     regions     = var.aws_regions
-    all_regions = false
+    all_regions = var.all_regions
   }
 }
 

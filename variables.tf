@@ -3,14 +3,21 @@ variable "aws_regions" {
   type        = list(string)
 }
 
+variable "all_regions" {
+  description = "AWS Config Aggregator pulls from all AWS Regions"
+  type        = bool
+  default     = false
+}
+
 variable "is_gov" {
   description = "AWS Config deployed in Gov account?"
   type        = bool
 }
 
 variable "account_ids" {
-  description = "AWS Account IDs for AWS Config Aggregator"
+  description = "If Aggregating by Account - AWS Account IDs for AWS Config Aggregator"
   type        = list(string)
+  default     = [""]
 }
 
 variable "resource_prefix" {
