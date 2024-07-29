@@ -52,5 +52,5 @@ resource "aws_iam_role_policy_attachment" "aggregator_organization" {
   count = var.aggregation_type == "organization" ? 1 : 0
 
   role       = aws_iam_role.aggregator_organization[0].name
-  policy_arn = "arn:aws-us-gov:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
 }
