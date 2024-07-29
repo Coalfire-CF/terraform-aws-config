@@ -73,7 +73,7 @@ resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSConfigRole"
 }
 
-resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
+resource "aws_iam_role_policy_attachment" "config_role_attachment4" {
   count = var.is_gov ? 0 : 1
 
   role       = aws_iam_role.custom_aws_config_role.name
