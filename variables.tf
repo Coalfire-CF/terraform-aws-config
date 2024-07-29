@@ -3,6 +3,11 @@ variable "aws_regions" {
   type        = list(string)
 }
 
+variable "is_gov" {
+  description = "AWS Config deployed in Gov account?"
+  type        = bool
+}
+
 variable "account_ids" {
   description = "AWS Account IDs for AWS Config Aggregator"
   type        = list(string)

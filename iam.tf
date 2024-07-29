@@ -60,11 +60,23 @@ resource "aws_iam_role_policy_attachment" "config_role_attachment1" {
 }
 
 resource "aws_iam_role_policy_attachment" "config_role_attachment2" {
+  count = var.is_gov ? 1 : 0
+
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AWS_Config_Role"
 }
 
 resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
+  count = var.is_gov ? 1 : 0
+
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSConfigRole"
 }
+
+resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
+  count = var.is_gov ? 0 : 1
+
+  role       = aws_iam_role.custom_aws_config_role.name
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
+}
+
