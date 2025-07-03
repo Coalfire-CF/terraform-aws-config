@@ -25,6 +25,18 @@ variable "resource_prefix" {
   type        = string
 }
 
+variable "name_prefix" {
+  description = "Prefix for resource names"
+  type        = string
+  default     = ""
+}
+
+variable "tags" {
+  description = "A map of tags to apply to all resources"
+  type        = map(string)
+  default     = {}
+}
+
 variable "is_enabled" {
   description = "Should config recorder be enabled?"
   type        = bool

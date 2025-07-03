@@ -1,0 +1,105 @@
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["config.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+data "aws_iam_policy_document" "s3_role_policy" {
+  statement {
+    effect  = "Allow"
+    actions = ["s3:*"]
+    resources = [
+      var.s3_config_arn,
+      "${var.s3_config_arn}/*"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "kms_role_policy" {
+  statement {
+    effect  = "Allow"
+    actions = ["kms:*"]
+    resources = [
+      var.config_kms_key_arn,
+      "${var.config_kms_key_arn}/*",
+      var.s3_kms_key_arn,
+      "${var.s3_kms_key_arn}/*"
+    ]
+  }
+}
+
+resource "aws_iam_role" "custom_aws_config_role" {
+  name               = "AWSConfigCustomRole"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
+resource "aws_iam_role_policy" "s3_config_role_policy" {
+
+  name   = "AWSConfigS3RolePolicy"
+  role   = aws_iam_role.custom_aws_config_role.id
+  policy = data.aws_iam_policy_document.s3_role_policy.json
+}
+
+resource "aws_iam_role_policy" "kms_config_role_policy" {
+
+  name   = "AWSConfigKMSRolePolicy"
+  role   = aws_iam_role.custom_aws_config_role.id
+  policy = data.aws_iam_policy_document.kms_role_policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "config_role_attachment1" {
+  role       = aws_iam_role.custom_aws_config_role.name
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole"
+}
+
+resource "aws_iam_role_policy_attachment" "config_role_attachment2" {
+  count = var.is_gov ? 1 : 0
+
+  role       = aws_iam_role.custom_aws_config_role.name
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole" #FAFIXUPDATE
+}
+
+resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
+  count = var.is_gov ? 1 : 0
+
+  role       = aws_iam_role.custom_aws_config_role.name
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole" #FAFIXUPDATE
+}
+
+resource "aws_iam_role_policy_attachment" "config_role_attachment4" {
+  count = var.is_gov ? 0 : 1
+
+  role       = aws_iam_role.custom_aws_config_role.name
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
+}
+
+
+##IAM from chatgpt
+resource "aws_iam_role" "aggregator" {
+  name = "AWSConfigAggregatorRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          Service = "config.amazonaws.com"
+        },
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "aggregator_attach" {
+  role       = aws_iam_role.aggregator.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
+}

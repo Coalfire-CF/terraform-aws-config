@@ -1,34 +1,6 @@
-provider "aws" {
-  alias   = "org"
-  region  = "us-gov-west-1"
-  profile = "org-account"
-}
-
-resource "aws_iam_role" "aggregator" {
-  name = "AWSConfigAggregatorRole"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = {
-          Service = "config.amazonaws.com"
-        },
-        Action = "sts:AssumeRole"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "aggregator_attach" {
-  role       = aws_iam_role.aggregator.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
-}
-
-resource "aws_config_configuration_recorder" "default" {
-  name     = "default"
-  role_arn = aws_iam_role.aggregator.arn
+resource "aws_config_configuration_recorder" "config" {
+  name     = "${var.resource_prefix}-config"
+  role_arn = aws_iam_role.custom_aws_config_role.arn
 
   recording_group {
     all_supported                 = true
@@ -36,26 +8,35 @@ resource "aws_config_configuration_recorder" "default" {
   }
 }
 
-resource "aws_config_delivery_channel" "default" {
-  name           = "default"
-  s3_bucket_name = var.config_bucket_name
-
-  depends_on = [aws_config_configuration_recorder.default]
+resource "aws_sns_topic" "config_delivery" {
+  name              = "${var.resource_prefix}-sns-config"
+  kms_master_key_id = var.sns_kms_key_id
 }
 
-resource "aws_config_configuration_recorder_status" "default" {
-  name       = aws_config_configuration_recorder.default.name
+resource "aws_config_delivery_channel" "config" {
+  name           = "${var.resource_prefix}-config-delivery"
+  s3_bucket_name = var.s3_config_id
+  sns_topic_arn  = aws_sns_topic.config_delivery.arn
+  depends_on = [aws_config_configuration_recorder.config]
+
+  snapshot_delivery_properties {
+    delivery_frequency = var.delivery_frequency
+}
+}
+
+resource "aws_config_configuration_recorder_status" "config" {
+  name       = aws_config_configuration_recorder.config.name
   is_enabled = true
-  depends_on = [aws_config_delivery_channel.default]
+  depends_on = [aws_config_delivery_channel.config]
 }
 
-resource "aws_config_configuration_aggregator" "org_aggregator" {
-  name = "config-organization-aggregator"
+resource "aws_config_organization_conformance_pack" "conformance_packs" {   
+  count = length(var.conformance_pack_names)
+  #add provider? # MUST BE CREATED IN DELEGATED ADMIN ACCOUNT
 
-  organization_aggregation_source {
-    role_arn    = aws_iam_role.aggregator.arn
-    all_regions = true
-  }
+  name               = var.conformance_pack_names[count.index]
+  delivery_s3_bucket = var.s3_config_id
+  template_s3_uri    = "s3://${var.s3_config_id}/${var.packs_s3_key}/${var.conformance_pack_names[count.index]}.yaml"
 
-  depends_on = [aws_iam_role_policy_attachment.aggregator_attach]
+  depends_on = [aws_s3_object.fedramp, aws_s3_object.nist, data.aws_organizations_organization.existing]
 }
