@@ -1,6 +1,6 @@
 # modules/organization-admin/outputs.tf
 
-output "delegated_org_account_id " {
+output "delegated_org_account_id" {
   description = "The AWS account ID of the delegated admin for AWS Config"
   value       = var.org_account_id
 }

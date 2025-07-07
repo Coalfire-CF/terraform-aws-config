@@ -4,18 +4,25 @@ locals {
   current_region     = data.aws_region.current.id
   partition          = data.aws_partition.current.partition
 
+  # Deployment mode flags
+  is_organization_deployment = var.deployment_type == "ORGANIZATION"
+  is_standalone_deployment   = var.deployment_type == "STANDALONE"
+
+  # Role-based flags
+  is_org_management_account  = local.is_organization_deployment && var.role == "ORG_MANAGEMENT"
+  is_delegated_admin_account = local.is_organization_deployment && var.role == "DELEGATED_ADMIN"
+  is_member_account          = var.role == "MEMBER"
+
   # Resource naming
   name_prefix = var.name_prefix != "" ? "${var.name_prefix}-" : ""
 
   # Common resource tags
   module_tags = {
     Module         = "terraform-aws-config"
+    DeploymentType = var.deployment_type
+    AccountRole    = var.role
     Region         = local.current_region
   }
-
-    # Deployment mode flags
-  is_organization_deployment = var.deployment_type == "ORGANIZATION"
-  is_standalone_deployment   = var.deployment_type == "STANDALONE"
 
   combined_tags = merge(local.module_tags, var.tags)
 }

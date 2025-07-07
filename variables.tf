@@ -10,22 +10,10 @@ variable "aws_regions" {
   type        = list(string)
 }
 
-variable "all_regions" {
-  description = "AWS Config Aggregator pulls from all AWS Regions"
-  type        = bool
-  default     = false
-}
-
 variable "is_gov" {
   description = "AWS Config deployed in Gov account?"
   type        = bool
 }
-
-# variable "account_ids" {
-#   description = "If Aggregating by Account - AWS Account IDs for AWS Config Aggregator"
-#   type        = list(string)
-#   default     = [""]
-# }
 
 variable "delegated_org_account_id" {
   description = "AWS Account ID to designate as Config delegated administrator"
@@ -53,12 +41,6 @@ variable "tags" {
   description = "A map of tags to apply to all resources"
   type        = map(string)
   default     = {}
-}
-
-variable "is_enabled" {
-  description = "Should config recorder be enabled?"
-  type        = bool
-  default     = true
 }
 
 ## S3 ##
@@ -132,5 +114,16 @@ variable "deployment_type" {
   validation {
     condition     = contains(["ORGANIZATION", "STANDALONE"], var.deployment_type)
     error_message = "deployment_type must be either ORGANIZATION or STANDALONE"
+  }
+}
+
+variable "role" {
+  description = "Role of this account: ORG_MANAGEMENT, DELEGATED_ADMIN, or MEMBER"
+  type        = string
+  default     = "MEMBER"
+
+  validation {
+    condition     = contains(["ORG_MANAGEMENT", "DELEGATED_ADMIN", "MEMBER"], var.role)
+    error_message = "role must be ORG_MANAGEMENT, DELEGATED_ADMIN, or MEMBER"
   }
 }

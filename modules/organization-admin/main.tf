@@ -1,21 +1,19 @@
-provider "aws" {
-  alias  = "org-root"
-  region = var.aws_region
-  profile = var.profile     # Ensure this is org-root account
-}
+# Handles AWS Config organization admin delegation
 
-resource "aws_organizations_organization" "this" {
-  provider    = aws.org-root
-  feature_set = "ALL"
-}
-
+# Enable trusted access for AWS Config in the org
 resource "aws_organizations_trusted_service_access" "config" {
-  provider          = aws.org-root
   service_principal = "config.amazonaws.com"
 }
 
+# Designate the delegated administrator account for AWS Config
 resource "aws_organizations_delegated_administrator" "config_delegate" {
-  provider          = aws.org-root
-  account_id        = var.org_account_id      # Ensure the mgmt account is assigned as the delegated admin
+  account_id        = var.org_account_id
   service_principal = "config.amazonaws.com"
+}
+
+# Add a delay to ensure delegation is fully propagated
+resource "time_sleep" "delegation_delay" {
+  depends_on = [aws_organizations_delegated_administrator.config_delegate]
+
+  create_duration = "30s"
 }

@@ -20,6 +20,6 @@ output "aggregator_role_arn" {
 
 output "config_delivery_bucket" {
   description = "The S3 bucket used to deliver AWS Config snapshots"
-  value       = var.config_bucket_name
+  value       = var.s3_bucket_id
 }
 
