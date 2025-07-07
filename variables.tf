@@ -1,3 +1,10 @@
+## GLOBAL ##
+
+variable "aws_region" {
+  description = "The AWS region for AWS Config Delegated Admin"
+  type        = string
+}
+
 variable "aws_regions" {
   description = "The AWS region(s) for AWS Config Aggregator"
   type        = list(string)
@@ -14,10 +21,16 @@ variable "is_gov" {
   type        = bool
 }
 
-variable "account_ids" {
-  description = "If Aggregating by Account - AWS Account IDs for AWS Config Aggregator"
-  type        = list(string)
-  default     = [""]
+# variable "account_ids" {
+#   description = "If Aggregating by Account - AWS Account IDs for AWS Config Aggregator"
+#   type        = list(string)
+#   default     = [""]
+# }
+
+variable "delegated_org_account_id" {
+  description = "AWS Account ID to designate as Config delegated administrator"
+  type        = string
+  default     = null
 }
 
 variable "resource_prefix" {
@@ -29,6 +42,11 @@ variable "name_prefix" {
   description = "Prefix for resource names"
   type        = string
   default     = ""
+}
+
+variable "profile" {
+  description = "The AWS profile aligned with the AWS environment to deploy to"
+  type        = string
 }
 
 variable "tags" {
@@ -43,6 +61,7 @@ variable "is_enabled" {
   default     = true
 }
 
+## S3 ##
 variable "s3_config_arn" {
   description = "S3 Bucket ARN for AWS Config"
   type        = string
@@ -59,6 +78,7 @@ variable "packs_s3_key" {
   default     = "packs"
 }
 
+## KMS ##
 variable "config_kms_key_arn" {
   description = "AWS Config KMS Key Arn"
   type        = string
@@ -100,5 +120,17 @@ variable "aggregation_type" {
       "account", "organization"
     ], var.aggregation_type)
     error_message = "Valid values for var: account or organization."
+  }
+}
+
+# Deployment Configuration
+variable "deployment_type" {
+  description = "Deployment type: ORGANIZATION or STANDALONE"
+  type        = string
+  default     = "ORGANIZATION"
+
+  validation {
+    condition     = contains(["ORGANIZATION", "STANDALONE"], var.deployment_type)
+    error_message = "deployment_type must be either ORGANIZATION or STANDALONE"
   }
 }

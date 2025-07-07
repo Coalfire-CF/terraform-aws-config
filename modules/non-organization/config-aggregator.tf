@@ -1,6 +1,6 @@
 # AWS Config aggregator
 
-## Organization Aggregator ##
+## Organization Aggregator ## TODO: REMOVE?
 resource "aws_config_configuration_aggregator" "config_aggregator" {
   name = "config-organization-aggregator"
 
@@ -26,8 +26,7 @@ resource "aws_config_configuration_aggregator" "account_config_aggregator" {
   }
 }
 
-
-## IAM Role for Organization Aggregator ##
+## IAM Role for Organization Aggregator ## #TODO: REMOVE?
 data "aws_iam_policy_document" "aggregator_assume_role" {
   statement {
     effect = "Allow"

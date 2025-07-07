@@ -1,7 +1,6 @@
-##aggregtaor from chatgpt
+## Organization Aggregator ##
 resource "aws_config_configuration_aggregator" "org_aggregator" {
   name = "config-organization-aggregator"
-
   count = var.aggregation_type == "organization" ? 1 : 0
 
   organization_aggregation_source {
@@ -12,23 +11,7 @@ resource "aws_config_configuration_aggregator" "org_aggregator" {
   depends_on = [aws_iam_role_policy_attachment.aggregator_attach]
 }
 
-
-# AWS Config aggregator
-
-## Organization Aggregator ##
-resource "aws_config_configuration_aggregator" "config_aggregator" {
-  name = "config-organization-aggregator"
-
-  count = var.aggregation_type == "organization" ? 1 : 0
-
-  organization_aggregation_source {
-    role_arn    = aws_iam_role.aggregator_organization[0].arn
-    regions     = var.aws_regions
-    all_regions = var.all_regions
-  }
-}
-
-## Account Aggregator ##
+## Account Aggregator ## TODO: REMOVE? 
 resource "aws_config_configuration_aggregator" "account_config_aggregator" {
   name = "config-account-aggregator"
 
@@ -40,7 +23,6 @@ resource "aws_config_configuration_aggregator" "account_config_aggregator" {
     all_regions = var.all_regions
   }
 }
-
 
 ## IAM Role for Organization Aggregator ##
 data "aws_iam_policy_document" "aggregator_assume_role" {
@@ -58,14 +40,12 @@ data "aws_iam_policy_document" "aggregator_assume_role" {
 
 resource "aws_iam_role" "aggregator_organization" {
   count = var.aggregation_type == "organization" ? 1 : 0
-
-  name               = "AWSConfigAggregatorRole"
+  name  = "AWSConfigAggregatorRole"
   assume_role_policy = data.aws_iam_policy_document.aggregator_assume_role.json
 }
 
 resource "aws_iam_role_policy_attachment" "aggregator_organization" {
   count = var.aggregation_type == "organization" ? 1 : 0
-
   role       = aws_iam_role.aggregator_organization[0].name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
 }
