@@ -17,7 +17,7 @@ module "config_baseline" {
   aws_regions        = var.aws_regions
   resource_prefix    = var.resource_prefix
   is_gov             = var.is_gov
-  role_arn           = aws_iam_role.custom_aws_config_role.arn #may need to update to tie into iam.tf file
+  role_arn           = module.config_baseline.custom_aws_config_role_arn
   s3_bucket_id       = var.s3_config_id
   s3_config_arn      = var.s3_config_arn
   s3_kms_key_arn     = var.s3_kms_key_arn

@@ -13,5 +13,5 @@ output "standalone_conformance_pack_names" {
 # Optional: Output all conformance pack ARNs (org or standalone)
 output "conformance_pack_arns" {
   description = "ARNs of deployed AWS Config conformance packs"
-  value = var.is_org ? aws_config_organization_conformance_pack.this[*].arn : aws_config_conformance_pack.this[*].arn
+  value       = var.is_org ? aws_config_organization_conformance_pack.this[*].arn : aws_config_conformance_pack.this[*].arn
 }

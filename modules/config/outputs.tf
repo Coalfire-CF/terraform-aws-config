@@ -62,4 +62,6 @@ output "kms_policy_name" {
   value       = aws_iam_role_policy.kms_config_role_policy.name
 }
 
-
+output "custom_aws_config_role_arn" {
+  value = aws_iam_role.custom_aws_config_role.arn
+}

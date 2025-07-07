@@ -8,8 +8,8 @@ resource "aws_config_configuration_aggregator" "org_aggregator" {
     all_regions = true
   }
 
-  depends_on = [aws_iam_role_policy_attachment.aggregator_attach]
-  #depends_on = [aws_iam_role_policy_attachment.aggregator_organization]
+  depends_on = [aws_iam_role_policy_attachment.aggregator_organization]
+
 }
 
 ## Account Aggregator ## 
