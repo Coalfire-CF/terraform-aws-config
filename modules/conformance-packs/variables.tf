@@ -18,8 +18,3 @@ variable "is_org" {
   description = "Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments."
   type        = bool
 }
-
-variable "depends_on" {
-  type    = list(any)
-  default = []
-}
