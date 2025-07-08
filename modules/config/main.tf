@@ -2,7 +2,7 @@
 resource "aws_sns_topic" "config_delivery" {
   name              = "${var.resource_prefix}-sns-config"
   kms_master_key_id = var.sns_kms_key_id
-  tags              = var.tags
+  tags = var.tags
 }
 
 # Create the config recorder
