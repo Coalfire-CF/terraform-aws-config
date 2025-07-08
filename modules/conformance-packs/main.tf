@@ -1,5 +1,5 @@
 # Organization conformance packs (For clients who use AWS Organizations)
-resource "aws_config_organization_conformance_pack" "this" {
+resource "aws_config_organization_conformance_pack" "conformance_packs" {
   count              = var.is_org ? length(var.pack_names) : 0
   name               = var.pack_names[count.index]
   delivery_s3_bucket = var.s3_bucket_id
@@ -8,7 +8,7 @@ resource "aws_config_organization_conformance_pack" "this" {
 }
 
 # Standalone conformance packs (For clients who DO NOT use AWS Organizations)
-resource "aws_config_conformance_pack" "this" {
+resource "aws_config_conformance_pack" "conformance_packs" {
   count              = var.is_org ? 0 : length(var.pack_names)
   name               = var.pack_names[count.index]
   delivery_s3_bucket = var.s3_bucket_id

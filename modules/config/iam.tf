@@ -41,14 +41,12 @@ resource "aws_iam_role" "custom_aws_config_role" {
 }
 
 resource "aws_iam_role_policy" "s3_config_role_policy" {
-
   name   = "AWSConfigS3RolePolicy"
   role   = aws_iam_role.custom_aws_config_role.id
   policy = data.aws_iam_policy_document.s3_role_policy.json
 }
 
 resource "aws_iam_role_policy" "kms_config_role_policy" {
-
   name   = "AWSConfigKMSRolePolicy"
   role   = aws_iam_role.custom_aws_config_role.id
   policy = data.aws_iam_policy_document.kms_role_policy.json
@@ -60,22 +58,19 @@ resource "aws_iam_role_policy_attachment" "config_role_attachment1" {
 }
 
 resource "aws_iam_role_policy_attachment" "config_role_attachment2" {
-  count = var.is_gov ? 1 : 0
-
+  count      = var.is_gov ? 1 : 0
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole" #FAFIXUPDATE
 }
 
 resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
-  count = var.is_gov ? 1 : 0
-
+  count      = var.is_gov ? 1 : 0
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole" #FAFIXUPDATE
 }
 
 resource "aws_iam_role_policy_attachment" "config_role_attachment4" {
-  count = var.is_gov ? 0 : 1
-
+  count      = var.is_gov ? 0 : 1
   role       = aws_iam_role.custom_aws_config_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
 }

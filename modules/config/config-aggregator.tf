@@ -9,7 +9,6 @@ resource "aws_config_configuration_aggregator" "org_aggregator" {
   }
 
   depends_on = [aws_iam_role_policy_attachment.aggregator_organization]
-
 }
 
 ## Account Aggregator ## 

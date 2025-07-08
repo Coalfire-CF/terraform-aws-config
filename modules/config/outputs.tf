@@ -1,3 +1,5 @@
+## Config Outputs ##
+
 output "config_recorder_name" {
   description = "The name of the AWS Config configuration recorder"
   value       = aws_config_configuration_recorder.this.name
@@ -63,5 +65,6 @@ output "kms_policy_name" {
 }
 
 output "custom_aws_config_role_arn" {
-  value = aws_iam_role.custom_aws_config_role.arn
+  description = "ARN of the custom IAM role used by AWS Config"
+  value       = aws_iam_role.custom_aws_config_role.arn
 }
