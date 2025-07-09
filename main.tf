@@ -38,6 +38,7 @@ module "conformance_packs" {
   source = "./modules/conformance-packs"
 
   aws_region         = var.aws_region
+  resource_prefix    = var.resource_prefix 
   default_aws_region = var.default_aws_region
   account_number     = var.account_number
   packs_s3_key       = var.packs_s3_key
