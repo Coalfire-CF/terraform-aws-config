@@ -2,12 +2,12 @@
 
 output "config_recorder_name" {
   description = "The name of the AWS Config configuration recorder"
-  value       = aws_config_configuration_recorder.this.name
+  value       = aws_config_configuration_recorder.config.name
 }
 
 output "delivery_channel_name" {
   description = "The name of the AWS Config delivery channel"
-  value       = aws_config_delivery_channel.this.name
+  value       = aws_config_delivery_channel.config.name
 }
 
 output "config_delivery_bucket" {
