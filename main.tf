@@ -35,7 +35,7 @@ module "conformance_packs" {
   source = "./modules/conformance-packs"
 
   packs_s3_key = var.packs_s3_key
-  is_org       = var.deployment_type
+  is_org       = var.is_org
   pack_names   = var.conformance_pack_names
   s3_bucket_id = var.s3_config_id
   depends_on   = [module.config_baseline]
