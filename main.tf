@@ -15,8 +15,11 @@ module "config_baseline" {
   source = "./modules/config"
 
   aws_regions        = var.aws_regions
+  default_aws_region = var.default_aws_region
   resource_prefix    = var.resource_prefix
   is_gov             = var.is_gov
+  is_org             = var.is_org
+  account_number     = var.account_number
   role_arn           = module.config_baseline.custom_aws_config_role_arn
   s3_bucket_id       = var.s3_config_id
   s3_config_arn      = var.s3_config_arn
