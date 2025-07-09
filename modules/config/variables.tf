@@ -11,6 +11,16 @@ variable "all_regions" {
   default     = false
 }
 
+variable "default_aws_region" {
+  description = "The default AWS region to create resources in"
+  type        = string
+}
+
+variable "account_number" {
+  description = "The AWS account number resources are being deployed into"
+  type        = string
+}
+
 variable "resource_prefix" {
   description = "The prefix for the s3 bucket names"
   type        = string
@@ -25,6 +35,11 @@ variable "is_gov" {
   description = "AWS Config deployed in Gov account?"
   type        = bool
   default     = true
+}
+
+variable "is_org" {
+  description = "Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments."
+  type        = bool
 }
 
 variable "tags" {
