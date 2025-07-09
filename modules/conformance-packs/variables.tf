@@ -51,3 +51,50 @@ variable "organization_id" {
   type        = string
   default     = null
 }
+
+variable "resource_prefix" {
+  description = "The prefix for the s3 bucket names"
+  type        = string
+}
+
+variable "s3_backup_settings" {
+  description = "Map of S3 bucket types to their backup settings"
+  type = map(object({
+    enable_backup = bool
+  }))
+  default = {
+    accesslogs = {
+      enable_backup = false # Assuming that a SIEM will ingest and store these logs
+    }
+    elb-accesslogs = {
+      enable_backup = false # Assuming that a SIEM will ingest and store these logs
+    }
+    backups = {
+      enable_backup = true
+    }
+    installs = {
+      enable_backup = true
+    }
+    fedrampdoc = {
+      enable_backup = true
+    }
+    cloudtrail = {
+      enable_backup = false # Assuming that a SIEM will ingest and store these logs
+    }
+    config = {
+      enable_backup = true
+    }
+  }
+}
+
+variable "s3_backup_policy" {
+  description = "S3 backup policy to use for S3 buckets in conjunction with AWS Backups, should match an existing policy"
+  type        = string
+  default     = "aws-backup-${var.resource_prefix}-default-policy"
+}
+
+variable "s3_tags" {
+  description = "Tags to be applied to S3 buckets"
+  type        = map(any)
+  default     = {}
+}
