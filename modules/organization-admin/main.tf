@@ -12,6 +12,6 @@ resource "aws_organizations_delegated_administrator" "config_delegate" {
 
 # Add a delay to ensure delegation is fully propagated
 resource "time_sleep" "delegation_delay" {
-  depends_on = [aws_organizations_delegated_administrator.config_delegate]
+  depends_on      = [aws_organizations_delegated_administrator.config_delegate]
   create_duration = "30s"
 }

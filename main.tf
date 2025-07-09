@@ -2,8 +2,8 @@
 
 module "organization_admin" {
   source = "./modules/organization-admin"
-  
-  count  = local.is_org_management_account && var.delegated_org_account_id != null ? 1 : 0
+
+  count          = local.is_org_management_account && var.delegated_org_account_id != null ? 1 : 0
   org_account_id = var.delegated_org_account_id
   profile        = var.profile
   aws_region     = var.aws_region
@@ -34,9 +34,12 @@ module "config_baseline" {
 module "conformance_packs" {
   source = "./modules/conformance-packs"
 
-  packs_s3_key = var.packs_s3_key
-  is_org       = var.is_org
-  pack_names   = var.conformance_pack_names
-  s3_bucket_id = var.s3_config_id
-  depends_on   = [module.config_baseline]
+  aws_region         = var.aws_region
+  default_aws_region = var.default_aws_region
+  account_number     = var.account_number
+  packs_s3_key       = var.packs_s3_key
+  is_org             = var.is_org
+  pack_names         = var.conformance_pack_names
+  s3_bucket_id       = var.s3_config_id
+  depends_on         = [module.config_baseline]
 }

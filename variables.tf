@@ -10,6 +10,11 @@ variable "aws_regions" {
   type        = list(string)
 }
 
+variable "default_aws_region" {
+  description = "The default AWS region to create resources in"
+  type        = string
+}
+
 variable "is_gov" {
   description = "AWS Config deployed in Gov account?"
   type        = bool
@@ -24,6 +29,11 @@ variable "delegated_org_account_id" {
   description = "AWS Account ID to designate as Config delegated administrator"
   type        = string
   default     = null
+}
+
+variable "account_number" {
+  description = "The AWS account number resources are being deployed into"
+  type        = string
 }
 
 variable "resource_prefix" {
