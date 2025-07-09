@@ -24,11 +24,13 @@ variable "role_arn" {
 variable "is_gov" {
   description = "AWS Config deployed in Gov account?"
   type        = bool
+  default     = true
 }
 
 variable "is_org" {
   description = "Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments."
   type        = bool
+  default     = true
 }
 
 variable "tags" {
