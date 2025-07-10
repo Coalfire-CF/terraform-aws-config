@@ -28,12 +28,12 @@ output "s3_bucket_arn" {
   value       = module.s3_config_conformance_pack[0].arn
 }
 
-output "s3_bucket_name" {
-  description = "Name of the conformance pack S3 bucket"
-  value       = module.s3_config_conformance_pack[0].name
-}
+# output "s3_bucket_name" {
+#   description = "Name of the conformance pack S3 bucket"
+#   value       = module.s3_config_conformance_pack[0].name
+# }
 
-output "s3_bucket_regional_domain_name" {
-  description = "Regional domain name of the conformance pack S3 bucket"
-  value       = module.s3_config_conformance_pack[0].bucket_regional_domain_name
-}
+# output "s3_bucket_regional_domain_name" {
+#   description = "Regional domain name of the conformance pack S3 bucket"
+#   value       = module.s3_config_conformance_pack[0].bucket_regional_domain_name
+# }
