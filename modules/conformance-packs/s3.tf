@@ -13,7 +13,7 @@ resource "aws_s3_object" "nist" {
 
 # Conformance Pack S3 Bucket - need to create a new bucket with prefix "awsconfigconforms"
 
-module "s3-config-conformance-pack" {
+module "s3_config_conformance_pack" {
   count = var.create_s3_config_bucket ? 1 : 0
 
   source = "github.com/Coalfire-CF/terraform-aws-s3?ref=v1.0.4"
@@ -27,7 +27,7 @@ module "s3-config-conformance-pack" {
 
   # S3 Access Logs
   logging       = true
-  target_bucket = var.s3_accesslog_bucket
+  target_bucket = var.s3_accesslog_bucket_name
   target_prefix = "config/"
 
   # Tags
@@ -41,7 +41,7 @@ module "s3-config-conformance-pack" {
 
 resource "aws_s3_bucket_policy" "config_bucket_policy" {
   count  = var.create_s3_config_bucket && var.default_aws_region == var.aws_region ? 1 : 0
-  bucket = s3-config-conformance-pack[0].id
+  bucket = module.s3_config_conformance_pack[0].id
 
   policy = data.aws_iam_policy_document.s3_config_bucket_policy_doc[0].json
 }
@@ -59,7 +59,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
       "s3:ListBucket"
     ]
     resources = [
-      module.s3-config-conformance-pack[0].arn
+      module.s3_config_conformance_pack[0].arn
     ]
     principals {
       type        = "Service"
@@ -76,7 +76,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
     effect  = "Allow"
     actions = ["s3:PutObject"]
     resources = [
-      "${module.s3-config-conformance-pack[0].arn}/*"
+      "${module.s3_config_conformance_pack[0].arn}/*"
     ]
     principals {
       type        = "Service"
@@ -104,7 +104,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
         "s3:ListBucket"
       ]
       resources = [
-        module.s3-config-conformance-pack[0].arn
+        module.s3_config_conformance_pack[0].arn
       ]
       principals {
         type        = "Service"
@@ -124,7 +124,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
       effect  = "Allow"
       actions = ["s3:PutObject"]
       resources = [
-        "${module.s3-config-conformance-pack[0].arn}/*"
+        "${module.s3_config_conformance_pack[0].arn}/*"
       ]
       principals {
         type        = "Service"
@@ -153,7 +153,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
         "s3:ListBucket"
       ]
       resources = [
-        module.s3-config-conformance-pack[0].arn
+        module.s3_config_conformance_pack[0].arn
       ]
       principals {
         type        = "Service"
@@ -173,7 +173,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
       effect  = "Allow"
       actions = ["s3:PutObject"]
       resources = [
-        "${module.s3-config-conformance-pack[0].arn}/*"
+        "${module.s3_config_conformance_pack[0].arn}/*"
       ]
       principals {
         type        = "Service"

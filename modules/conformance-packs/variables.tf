@@ -105,6 +105,6 @@ variable "kms_key_id" {
 }
 
 variable "s3_accesslog_bucket_name" {
-  description = "S3 Access Log Bucket Name"
+  description = "The name of the S3 bucket for access logs"
   type        = string
 }

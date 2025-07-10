@@ -10,8 +10,30 @@ output "standalone_conformance_pack_names" {
   value       = var.is_org ? [] : aws_config_conformance_pack.conformance_packs[*].name
 }
 
-# Optional: Output all conformance pack ARNs (org or standalone)
+# Output all conformance pack ARNs (org or standalone)
 output "conformance_pack_arns" {
   description = "ARNs of deployed AWS Config conformance packs"
   value       = var.is_org ? aws_config_organization_conformance_pack.conformance_packs[*].arn : aws_config_conformance_pack.conformance_packs[*].arn
+}
+
+# s3.tf outputs
+
+output "s3_bucket_id" {
+  description = "ID (name) of the conformance pack S3 bucket"
+  value       = module.s3_config_conformance_pack[0].id
+}
+
+output "s3_bucket_arn" {
+  description = "ARN of the conformance pack S3 bucket"
+  value       = module.s3_config_conformance_pack[0].arn
+}
+
+output "s3_bucket_name" {
+  description = "Name of the conformance pack S3 bucket"
+  value       = module.s3_config_conformance_pack[0].name
+}
+
+output "s3_bucket_regional_domain_name" {
+  description = "Regional domain name of the conformance pack S3 bucket"
+  value       = module.s3_config_conformance_pack[0].bucket_regional_domain_name
 }

@@ -37,13 +37,15 @@ module "config_baseline" {
 module "conformance_packs" {
   source = "./modules/conformance-packs"
 
-  aws_region         = var.aws_region
-  resource_prefix    = var.resource_prefix 
-  default_aws_region = var.default_aws_region
-  account_number     = var.account_number
-  packs_s3_key       = var.packs_s3_key
-  is_org             = var.is_org
-  pack_names         = var.conformance_pack_names
-  s3_bucket_id       = var.s3_config_id
-  depends_on         = [module.config_baseline]
+  aws_region               = var.aws_region
+  resource_prefix          = var.resource_prefix
+  default_aws_region       = var.default_aws_region
+  account_number           = var.account_number
+  packs_s3_key             = var.packs_s3_key
+  kms_key_id               = var.sns_kms_key_id
+  is_org                   = var.is_org
+  pack_names               = var.conformance_pack_names
+  s3_bucket_id             = var.s3_config_id
+  s3_accesslog_bucket_name = var.s3_accesslog_bucket_name
+  depends_on               = [module.config_baseline]
 }
