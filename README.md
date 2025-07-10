@@ -1,6 +1,10 @@
-# AWS Config Terraform Module
-
 ![Coalfire](coalfire_logo.png)
+
+# terraform-aws-config
+
+## Description
+
+This module creates the necessary resources for AWS Config deployment and configuration.
 
 ## Dependencies
 - [Account Setup module](https://github.com/Coalfire-CF/terraform-aws-account-setup)
@@ -17,21 +21,9 @@
 - Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
 - Due to the nature of this Github repository being opensource there are a few rules out of the box that were removed in order to get this module to properly scan the AWS Accounts
 
-## Deployment Steps
-
-This module can be called as outlined below.
-
-- Change directories to the `config` directory.
-- From the `terraform/aws/config` directory run `terraform init`.
-- Run `terraform plan` to review the resources being created.
-- If everything looks correct in the plan output, run `terraform apply`.
-
 ## Usage
 
-Include example for how to call the module below with generic variables
-
 ```hcl
-
 module "config" {
   source = "github.com/Coalfire-CF/terraform-aws-config"
 
@@ -49,8 +41,79 @@ module "config" {
   account_ids      = local.share_accounts
   aggregation_type = "organization"
 }
-
 ```
+
+## Environment Setup
+
+```hcl
+IAM user authentication:
+
+- Download and install the AWS CLI (https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- Log into the AWS Console and create AWS CLI Credentials (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+- Configure the named profile used for the project, such as 'aws configure --profile example-mgmt'
+
+SSO-based authentication (via IAM Identity Center SSO):
+
+- Login to the AWS IAM Identity Center console, select the permission set for MGMT, and select the 'Access Keys' link.
+- Choose the 'IAM Identity Center credentials' method to get the SSO Start URL and SSO Region values.
+- Run the setup command 'aws configure sso --profile example-mgmt' and follow the prompts.
+- Verify you can run AWS commands successfully, for example 'aws s3 ls --profile example-mgmt'.
+- Run 'export AWS_PROFILE=example-mgmt' in your terminal to use the specific profile and avoid having to use '--profile' option.
+```
+
+## Deployment
+
+1. Navigate to the Terraform project and create a parent directory in the upper level code, for example:
+
+    ```hcl
+    ../{CLOUD}/terraform/{REGION}/management-account/example
+    ```
+
+   If multi-account management plane:
+
+    ```hcl
+    ../{CLOUD}/terraform/{REGION}/{ACCOUNT_TYPE}-mgmt-account/example
+    ```
+
+2. Create a properly defined main.tf file via the template found under 'Usage' while adjusting auto.tfvars as needed. Note that many provided variables are outputs from other modules. Example parent directory:
+
+   ```hcl
+   ├── Example/
+   │   ├── example.auto.tfvars   
+   │   ├── main.tf
+   │   ├── outputs.tf
+   │   ├── providers.tf
+   │   ├── remote-data.tf
+   │   ├── required-providers.tf
+   │   ├── variables.tf
+   │   ├── ...
+   ```
+   Make sure that 'remote-data.tf' defines the S3 backend which is on the Management account state bucket. For example:
+
+    ```hcl
+    terraform {
+      backend "s3" {
+        bucket       = "${var.resource_prefix}-us-gov-west-1-tf-state"
+        region       = "us-gov-west-1"
+        key          = "${var.resource_prefix}-us-gov-west-1-aws-config.tfstate"
+        encrypt      = true
+        use_lockfile = true
+      }
+    }
+    ```
+
+3. Initialize the Terraform working directory:
+   ```hcl
+   terraform init
+   ```
+   Create an execution plan and verify the resources being created:
+   ```hcl
+   terraform plan
+   ```
+   Apply the configuration:
+   ```hcl
+   terraform apply
+   ```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
