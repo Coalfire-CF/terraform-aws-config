@@ -98,3 +98,13 @@ variable "s3_tags" {
   type        = map(any)
   default     = {}
 }
+
+variable "kms_key_id" {
+  description = "KMS key for S3"
+  type        = string
+}
+
+variable "s3_accesslog_bucket_name" {
+  description = "S3 Access Log Bucket Name"
+  type        = string
+}
