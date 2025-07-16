@@ -84,6 +84,11 @@ variable "s3_accesslog_bucket_name" {
   type        = string
 }
 
+variable "s3_key_prefix" {
+  description = "Prefix within the S3 bucket for AWS Config to write data"
+  type        = string
+}
+
 ## KMS ##
 variable "config_kms_key_arn" {
   description = "AWS Config KMS Key Arn"

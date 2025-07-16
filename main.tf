@@ -23,6 +23,7 @@ module "config_baseline" {
   role_arn           = module.config_baseline.custom_aws_config_role_arn
   s3_bucket_id       = var.s3_config_id
   s3_config_arn      = var.s3_config_arn
+  s3_key_prefix      = var.s3_key_prefix
   s3_kms_key_arn     = var.s3_kms_key_arn
   sns_kms_key_id     = var.sns_kms_key_id
   config_kms_key_arn = var.config_kms_key_arn

@@ -20,8 +20,8 @@ resource "aws_config_configuration_recorder" "config" {
 resource "aws_config_delivery_channel" "config" {
   name           = "${var.resource_prefix}-config-delivery" # Custom name for delivery channel
   s3_bucket_name = var.s3_bucket_id                         # Destination S3 bucket
-  s3_key_prefix   = var.s3_key_prefix
-  sns_topic_arn  = aws_sns_topic.config_delivery.arn        # SNS topic for notifications
+  s3_key_prefix  = var.s3_key_prefix
+  sns_topic_arn  = aws_sns_topic.config_delivery.arn # SNS topic for notifications
 
   snapshot_delivery_properties {
     delivery_frequency = var.delivery_frequency # How often snapshots are delivered (e.g., 6 hours)
