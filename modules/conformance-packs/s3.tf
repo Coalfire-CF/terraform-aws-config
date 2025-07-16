@@ -1,8 +1,8 @@
 # Upload conformance pack YAML for FedRAMP to S3
 resource "aws_s3_object" "fedramp" {
   bucket = var.s3_bucket_id
-  key    = "/${var.packs_s3_key}/Operational-Best-Practices-for-FedRAMP.yaml"                # Object key (path) in bucket
-  source = "${path.module}/s3-aws-config-files/Operational-Best-Practices-for-FedRAMP.yaml"  # Local file source
+  key    = "/${var.packs_s3_key}/Operational-Best-Practices-for-FedRAMP.yaml"               # Object key (path) in bucket
+  source = "${path.module}/s3-aws-config-files/Operational-Best-Practices-for-FedRAMP.yaml" # Local file source
 }
 
 # Upload conformance pack YAML for NIST 800-53 to S3
@@ -14,21 +14,21 @@ resource "aws_s3_object" "nist" {
 
 # Optional: Create dedicated S3 bucket for AWS Config conformance packs
 module "s3_config_conformance_pack" {
-  count = var.create_s3_config_bucket ? 1 : 0  # Only create if explicitly enabled
+  count = var.create_s3_config_bucket ? 1 : 0 # Only create if explicitly enabled
 
   source = "github.com/Coalfire-CF/terraform-aws-s3?ref=v1.0.4"
 
-  name                    = "awsconfigconforms-${var.resource_prefix}-${var.aws_region}"  # Bucket name with prefix
+  name                    = "awsconfigconforms-${var.resource_prefix}-${var.aws_region}" # Bucket name with prefix
   kms_master_key_id       = var.kms_key_id
-  attach_public_policy    = false                                                         # Deny public access
+  attach_public_policy    = false # Deny public access
   block_public_acls       = true
   ignore_public_acls      = true
   restrict_public_buckets = true
 
   # S3 access logging
   logging       = true
-  target_bucket = var.s3_accesslog_bucket_name         # Where access logs should be delivered
-  target_prefix = "config/"                            # Prefix for logs in logging bucket
+  target_bucket = var.s3_accesslog_bucket_name # Where access logs should be delivered
+  target_prefix = "config/"                    # Prefix for logs in logging bucket
 
   # Merge backup tags with general tags
   tags = merge(
@@ -65,12 +65,12 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
     ]
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com"]  # AWS Config service principal
+      identifiers = ["config.amazonaws.com"] # AWS Config service principal
     }
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
-      values   = [var.account_number]  # Enforce source account restriction
+      values   = [var.account_number] # Enforce source account restriction
     }
   }
 
@@ -88,7 +88,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
     condition {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"
-      values   = ["bucket-owner-full-control"]  # Ensure object ownership
+      values   = ["bucket-owner-full-control"] # Ensure object ownership
     }
     condition {
       test     = "StringEquals"
@@ -116,7 +116,7 @@ data "aws_iam_policy_document" "s3_config_bucket_policy_doc" {
       condition {
         test     = "StringEquals"
         variable = "aws:SourceAccount"
-        values   = var.application_account_numbers  # Accept list of allowed account IDs
+        values   = var.application_account_numbers # Accept list of allowed account IDs
       }
     }
   }

@@ -18,8 +18,8 @@ data "aws_iam_policy_document" "s3_role_policy" {
     effect  = "Allow"
     actions = ["s3:*"]
     resources = [
-      var.s3_config_arn,         # Bucket ARN
-      "${var.s3_config_arn}/*"   # Objects within the bucket
+      var.s3_config_arn,       # Bucket ARN
+      "${var.s3_config_arn}/*" # Objects within the bucket
     ]
   }
 }
@@ -30,10 +30,10 @@ data "aws_iam_policy_document" "kms_role_policy" {
     effect  = "Allow"
     actions = ["kms:*"]
     resources = [
-      var.config_kms_key_arn,         # AWS Config KMS key ARN
-      "${var.config_kms_key_arn}/*",  # Nested resources (if applicable)
-      var.s3_kms_key_arn,             # S3 bucket KMS key ARN
-      "${var.s3_kms_key_arn}/*"       # Nested resources (if applicable)
+      var.config_kms_key_arn,        # AWS Config KMS key ARN
+      "${var.config_kms_key_arn}/*", # Nested resources (if applicable)
+      var.s3_kms_key_arn,            # S3 bucket KMS key ARN
+      "${var.s3_kms_key_arn}/*"      # Nested resources (if applicable)
     ]
   }
 }

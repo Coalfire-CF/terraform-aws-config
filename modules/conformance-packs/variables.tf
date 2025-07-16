@@ -32,6 +32,11 @@ variable "organization_id" {
   default     = null
 }
 
+variable "resource_prefix" {
+  description = "The prefix for the s3 bucket names"
+  type        = string
+}
+
 ## CONFORMANCE PACK CONFIGURATION VARIABLES ##
 
 variable "pack_names" {
