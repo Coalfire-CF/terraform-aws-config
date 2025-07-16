@@ -111,9 +111,3 @@ variable "kms_key_id" {
   description = "KMS key for S3"
   type        = string
 }
-
-##
-# variable "resource_prefix" {
-#   description = "The prefix for the s3 bucket names"
-#   type        = string
-# }

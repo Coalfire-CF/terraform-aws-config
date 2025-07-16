@@ -1,5 +1,10 @@
 ## GLOBAL / ENVIRONMENT VARIABLES ##
 
+variable "default_aws_region" {
+  description = "The default AWS region to create resources in"
+  type        = string
+}
+
 variable "aws_regions" {
   description = "The AWS region(s) for AWS Config Aggregator"
   type        = list(string)
@@ -27,10 +32,20 @@ variable "is_org" {
   type        = bool
 }
 
+variable "account_number" {
+  description = "The AWS account number resources are being deployed into"
+  type        = string
+}
+
 variable "tags" {
   description = "A map of tags to apply to all resources"
   type        = map(string)
   default     = {}
+}
+
+variable "role_arn" {
+  description = "The ARN of the IAM role to be assumed by AWS Config for recording configuration changes or aggregation."
+  type        = string
 }
 
 ## AGGREGATOR CONFIGURATION ## 
