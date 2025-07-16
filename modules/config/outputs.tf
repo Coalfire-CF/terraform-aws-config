@@ -52,7 +52,7 @@ output "config_iam_role_name" {
   value       = aws_iam_role.custom_aws_config_role.name
 }
 
-# Redundant output: same as config_iam_role_arn
+# Redundant output: same as config_iam_role_arn - confirm if/where this output is needed
 output "custom_aws_config_role_arn" {
   description = "ARN of the custom IAM role used by AWS Config"
   value       = aws_iam_role.custom_aws_config_role.arn

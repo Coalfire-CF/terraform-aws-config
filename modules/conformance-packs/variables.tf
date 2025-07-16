@@ -1,37 +1,17 @@
-variable "pack_names" {
-  description = "A list of conformance pack names to be deployed"
-  type        = list(string)
-}
-
-variable "packs_s3_key" {
-  description = "S3 Bucket prefix for the Packs uploaded"
-  type        = string
-  default     = "packs"
-}
-
-variable "s3_bucket_id" {
-  description = "Name of the S3 bucket for AWS Config delivery channel"
-  type        = string
-}
+## GLOBAL / ENVIRONMENT VARIABLES ##
 
 variable "is_org" {
   description = "Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments."
   type        = bool
 }
 
-variable "create_s3_config_bucket" {
-  description = "Create S3 AWS Config Bucket for conformance pack storage"
-  type        = bool
-  default     = true
+variable "aws_region" {
+  description = "The AWS region to create resources in"
+  type        = string
 }
 
 variable "default_aws_region" {
   description = "The default AWS region to create resources in"
-  type        = string
-}
-
-variable "aws_region" {
-  description = "The AWS region to create resources in"
   type        = string
 }
 
@@ -52,8 +32,34 @@ variable "organization_id" {
   default     = null
 }
 
-variable "resource_prefix" {
-  description = "The prefix for the s3 bucket names"
+## CONFORMANCE PACK CONFIGURATION VARIABLES ##
+
+variable "pack_names" {
+  description = "A list of conformance pack names to be deployed"
+  type        = list(string)
+}
+
+variable "packs_s3_key" {
+  description = "S3 Bucket prefix for the Packs uploaded"
+  type        = string
+  default     = "packs"
+}
+
+## S3 BUCKET VARIABLES ## 
+
+variable "create_s3_config_bucket" {
+  description = "Create S3 AWS Config Bucket for conformance pack storage"
+  type        = bool
+  default     = true
+}
+
+variable "s3_bucket_id" {
+  description = "Name of the S3 bucket for AWS Config delivery channel"
+  type        = string
+}
+
+variable "s3_accesslog_bucket_name" {
+  description = "The name of the S3 bucket for access logs"
   type        = string
 }
 
@@ -99,12 +105,15 @@ variable "s3_tags" {
   default     = {}
 }
 
+## KMS VARIABLES ##
+
 variable "kms_key_id" {
   description = "KMS key for S3"
   type        = string
 }
 
-variable "s3_accesslog_bucket_name" {
-  description = "The name of the S3 bucket for access logs"
-  type        = string
-}
+##
+# variable "resource_prefix" {
+#   description = "The prefix for the s3 bucket names"
+#   type        = string
+# }

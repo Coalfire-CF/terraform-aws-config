@@ -11,25 +11,10 @@ variable "all_regions" {
   default     = false
 }
 
-# variable "default_aws_region" {
-#   description = "The default AWS region to create resources in"
-#   type        = string
-# }
-
-# variable "account_number" {
-#   description = "The AWS account number resources are being deployed into"
-#   type        = string
-# }
-
 variable "resource_prefix" {
   description = "The prefix for the s3 bucket names"
   type        = string
 }
-
-# variable "role_arn" {
-#   description = "The ARN of the IAM role that AWS Config uses to record and deliver configuration changes."
-#   type        = string
-# }
 
 variable "is_gov" {
   description = "AWS Config deployed in Gov account?"
