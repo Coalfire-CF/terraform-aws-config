@@ -172,6 +172,7 @@ SSO-based authentication (via IAM Identity Center SSO):
 | <a name="input_s3_accesslog_bucket_name"></a> [s3\_accesslog\_bucket\_name](#input\_s3\_accesslog\_bucket\_name) | S3 Access Log Bucket Name | `string` | n/a | yes |
 | <a name="input_s3_config_arn"></a> [s3\_config\_arn](#input\_s3\_config\_arn) | S3 Bucket ARN for AWS Config | `string` | n/a | yes |
 | <a name="input_s3_config_id"></a> [s3\_config\_id](#input\_s3\_config\_id) | S3 bucket ID for AWS Config | `string` | n/a | yes |
+| <a name="input_s3_key_prefix"></a> [s3\_key\_prefix](#input\_s3\_key\_prefix) | Prefix within the S3 bucket for AWS Config to write data | `string` | n/a | yes |
 | <a name="input_s3_kms_key_arn"></a> [s3\_kms\_key\_arn](#input\_s3\_kms\_key\_arn) | AWS S3 KMS Key Arn | `string` | n/a | yes |
 | <a name="input_sns_kms_key_id"></a> [sns\_kms\_key\_id](#input\_sns\_kms\_key\_id) | SNS KMS key ID | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
