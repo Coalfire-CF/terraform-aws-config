@@ -67,6 +67,12 @@ variable "aggregation_type" {
   }
 }
 
+variable "organization_id" {
+  description = "AWS Organization ID to restrict IAM policies or bucket policies"
+  type        = string
+  default     = null
+}
+
 ## S3 BUCKET VARIABLES ## 
 
 variable "s3_bucket_id" {

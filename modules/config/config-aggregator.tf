@@ -34,6 +34,16 @@ data "aws_iam_policy_document" "aggregator_assume_role" {
     }
 
     actions = ["sts:AssumeRole"]
+
+    # Add condition if organization_id is set
+    dynamic "condition" {
+      for_each = var.organization_id != null ? [1] : []
+      content {
+        test     = "StringEquals"
+        variable = "aws:PrincipalOrgID"
+        values   = [var.organization_id]
+      }
+    }
   }
 }
 

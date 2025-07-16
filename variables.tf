@@ -57,6 +57,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "organization_id" {
+  description = "AWS Organization ID to restrict IAM policies or bucket policies"
+  type        = string
+  default     = null
+}
+
 ## S3 ##
 variable "s3_config_arn" {
   description = "S3 Bucket ARN for AWS Config"

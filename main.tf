@@ -19,6 +19,7 @@ module "config_baseline" {
   resource_prefix    = var.resource_prefix
   is_gov             = var.is_gov
   is_org             = var.is_org
+  organization_id    = var.organization_id
   account_number     = var.account_number
   role_arn           = module.config_baseline.custom_aws_config_role_arn
   s3_bucket_id       = var.s3_config_id
