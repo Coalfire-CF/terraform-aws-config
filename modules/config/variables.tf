@@ -79,6 +79,12 @@ variable "s3_config_arn" {
   type        = string
 }
 
+variable "s3_key_prefix" {
+  description = "Prefix within the S3 bucket for AWS Config to write data"
+  type        = string
+  default     = "config/"
+}
+
 ## KMS CONFIGURATION ## 
 
 variable "sns_kms_key_id" {
