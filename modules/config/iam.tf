@@ -68,14 +68,22 @@ resource "aws_iam_role_policy_attachment" "config_role_attachment1" {
 resource "aws_iam_role_policy_attachment" "config_role_attachment2" {
   count      = var.is_gov ? 1 : 0
   role       = aws_iam_role.custom_aws_config_role.name
+<<<<<<< HEAD:modules/config/iam.tf
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole" #FAUPDATE
+=======
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole"
+>>>>>>> cd8e47bbaa3d67ada37463dfb9566c53a7c91a5e:iam.tf
 }
 
 # Duplicate attachment for GovCloud (possibly intended to be a different policy)
 resource "aws_iam_role_policy_attachment" "config_role_attachment3" {
   count      = var.is_gov ? 1 : 0
   role       = aws_iam_role.custom_aws_config_role.name
+<<<<<<< HEAD:modules/config/iam.tf
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole" #FAUPDATE
+=======
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AWS_ConfigRole"
+>>>>>>> cd8e47bbaa3d67ada37463dfb9566c53a7c91a5e:iam.tf
 }
 
 # Attach Org-level Config policy in commercial partitions
