@@ -12,7 +12,7 @@ resource "aws_s3_object" "nist" {
   source = "${path.module}/s3-aws-config-files/Operational-Best-Practices-for-NIST-800-53-rev-5.yaml"
 }
 
-# Optional: Create dedicated S3 bucket for AWS Config conformance packs
+# Create dedicated S3 bucket for AWS Config conformance packs
 module "s3_config_conformance_pack" {
   count = var.create_s3_config_bucket ? 1 : 0 # Only create if explicitly enabled
 
