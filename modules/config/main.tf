@@ -21,6 +21,7 @@ resource "aws_config_delivery_channel" "config" {
   name           = "${var.resource_prefix}-config-delivery" # Custom name for delivery channel
   s3_bucket_name = var.s3_bucket_id                         # Destination S3 bucket
   s3_key_prefix  = var.s3_key_prefix
+  s3_kms_key_arn = var.s3_kms_key_arn
   sns_topic_arn  = aws_sns_topic.config_delivery.arn # SNS topic for notifications
 
   snapshot_delivery_properties {
