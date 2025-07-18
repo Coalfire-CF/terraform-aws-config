@@ -2,14 +2,14 @@
 resource "aws_s3_object" "fedramp" {
   bucket = var.s3_bucket_id
   key    = "/${var.packs_s3_key}/Operational-Best-Practices-for-FedRAMP.yaml"               # Object key (path) in bucket
-  source = "${path.module}/s3-aws-config-files/Operational-Best-Practices-for-FedRAMP.yaml" # Local file source
+  source = "${path.module}/../../s3-aws-config-files/Operational-Best-Practices-for-FedRAMP.yaml" # Local file source
 }
 
 # Upload conformance pack YAML for NIST 800-53 to S3
 resource "aws_s3_object" "nist" {
   bucket = var.s3_bucket_id
   key    = "/${var.packs_s3_key}/Operational-Best-Practices-for-NIST-800-53-rev-5.yaml"
-  source = "${path.module}/s3-aws-config-files/Operational-Best-Practices-for-NIST-800-53-rev-5.yaml"
+  source = "${path.module}/../../s3-aws-config-files/Operational-Best-Practices-for-NIST-800-53-rev-5.yaml"
 }
 
 # Optional: Create dedicated S3 bucket for AWS Config conformance packs
