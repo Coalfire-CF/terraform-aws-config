@@ -20,8 +20,8 @@ output "config_delivery_bucket" {
 
 # Output the ARN of the SNS topic used for Config notifications
 output "sns_topic_arn" {
-  description = "ARN of the SNS topic used by AWS Config"
-  value       = aws_sns_topic.config_delivery.arn
+  description = "ARN of the SNS topic used by AWS Config. Null if topic is not created."
+  value       = var.create_sns_topic ? aws_sns_topic.config_delivery[0].arn : null
 }
 
 ## Config Aggregator Outputs ##

@@ -26,6 +26,7 @@ module "config_baseline" {
   s3_config_arn      = var.s3_config_arn
   s3_key_prefix      = var.s3_key_prefix
   s3_kms_key_arn     = var.s3_kms_key_arn
+  create_sns_topic   = var.create_sns_topic
   sns_kms_key_id     = var.sns_kms_key_id
   config_kms_key_arn = var.config_kms_key_arn
   delivery_frequency = var.delivery_frequency

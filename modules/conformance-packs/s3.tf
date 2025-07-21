@@ -1,7 +1,7 @@
 # Upload conformance pack YAML for FedRAMP to S3
 resource "aws_s3_object" "fedramp" {
   bucket = var.s3_bucket_id
-  key    = "/${var.packs_s3_key}/Operational-Best-Practices-for-FedRAMP.yaml"               # Object key (path) in bucket
+  key    = "/${var.packs_s3_key}/Operational-Best-Practices-for-FedRAMP.yaml"                     # Object key (path) in bucket
   source = "${path.module}/../../s3-aws-config-files/Operational-Best-Practices-for-FedRAMP.yaml" # Local file source
 }
 

@@ -1,5 +1,6 @@
 # Create SNS Topic for AWS Config notifications
 resource "aws_sns_topic" "config_delivery" {
+  count             = var.create_sns_topic ? 1 : 0        # Conditionally create the SNS topic only if var.create_sns_topic is true
   name              = "${var.resource_prefix}-sns-config" # Custom name for SNS topic
   kms_master_key_id = var.sns_kms_key_id                  # KMS key for encrypting SNS messages
   tags              = var.tags
@@ -22,7 +23,7 @@ resource "aws_config_delivery_channel" "config" {
   s3_bucket_name = var.s3_bucket_id                         # Destination S3 bucket
   s3_key_prefix  = var.s3_key_prefix
   s3_kms_key_arn = var.s3_kms_key_arn
-  sns_topic_arn  = aws_sns_topic.config_delivery.arn # SNS topic for notifications
+  sns_topic_arn  = var.create_sns_topic ? aws_sns_topic.config_delivery[0].arn : null # SNS topic for notifications
 
   snapshot_delivery_properties {
     delivery_frequency = var.delivery_frequency # How often snapshots are delivered (e.g., 6 hours)

@@ -162,3 +162,8 @@ variable "role" {
     error_message = "role must be ORG_MANAGEMENT, DELEGATED_ADMIN, or MEMBER"
   }
 }
+
+variable "create_sns_topic" {
+  description = "Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed."
+  type        = bool
+}

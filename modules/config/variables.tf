@@ -120,3 +120,8 @@ variable "delivery_frequency" {
     error_message = "Valid values for delivery_frequency are: One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours."
   }
 }
+
+variable "create_sns_topic" {
+  description = "Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed."
+  type        = bool
+}
