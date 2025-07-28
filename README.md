@@ -151,23 +151,26 @@ SSO-based authentication (via IAM Identity Center SSO):
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_account_number"></a> [account\_number](#input\_account\_number) | The AWS account number resources are being deployed into | `string` | `null` | no |
+| <a name="input_account_number"></a> [account\_number](#input\_account\_number) | The AWS account number where this Terraform deployment is running. | `string` | n/a | yes |
 | <a name="input_aggregation_type"></a> [aggregation\_type](#input\_aggregation\_type) | Aggregation Type | `string` | `"organization"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region for AWS Config Delegated Admin | `string` | n/a | yes |
 | <a name="input_aws_regions"></a> [aws\_regions](#input\_aws\_regions) | The AWS region(s) for AWS Config Aggregator | `list(string)` | `null` | no |
 | <a name="input_config_kms_key_arn"></a> [config\_kms\_key\_arn](#input\_config\_kms\_key\_arn) | AWS Config KMS Key Arn | `string` | `null` | no |
+| <a name="input_config_role_arn"></a> [config\_role\_arn](#input\_config\_role\_arn) | Optional ARN of an IAM Role to use for AWS Config. If not provided, the module can create one. | `string` | `null` | no |
 | <a name="input_conformance_pack_names"></a> [conformance\_pack\_names](#input\_conformance\_pack\_names) | A list of conformance pack names to be deployed | `list(string)` | <pre>[<br/>  "Operational-Best-Practices-for-FedRAMP",<br/>  "Operational-Best-Practices-for-NIST-800-53-rev-5"<br/>]</pre> | no |
-| <a name="input_create_config_in_admin"></a> [create\_config\_in\_admin](#input\_create\_config\_in\_admin) | Deployment Configuration | `bool` | `true` | no |
-| <a name="input_create_config_recorder"></a> [create\_config\_recorder](#input\_create\_config\_recorder) | Whether to create Config Recorder (false will use existing detector) | `bool` | `true` | no |
-| <a name="input_create_delivery_channel"></a> [create\_delivery\_channel](#input\_create\_delivery\_channel) | Whether to create Config Delivery Channel (false will use existing detector) | `bool` | `true` | no |
+| <a name="input_create_config_in_admin"></a> [create\_config\_in\_admin](#input\_create\_config\_in\_admin) | Determines whether to create AWS Config resources specifically in the delegated admin account. Set to true to enable creation in the delegated admin, false to skip. | `bool` | `true` | no |
+| <a name="input_create_config_recorder"></a> [create\_config\_recorder](#input\_create\_config\_recorder) | Whether to create Config Recorder | `bool` | `true` | no |
+| <a name="input_create_delivery_channel"></a> [create\_delivery\_channel](#input\_create\_delivery\_channel) | Whether to create Config Delivery Channel | `bool` | `true` | no |
 | <a name="input_create_sns_topic"></a> [create\_sns\_topic](#input\_create\_sns\_topic) | Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed. | `bool` | `false` | no |
 | <a name="input_default_aws_region"></a> [default\_aws\_region](#input\_default\_aws\_region) | The default AWS region to create resources in | `string` | `null` | no |
 | <a name="input_delegated_org_account_id"></a> [delegated\_org\_account\_id](#input\_delegated\_org\_account\_id) | AWS Account ID to designate as Config delegated administrator | `string` | `null` | no |
 | <a name="input_delivery_frequency"></a> [delivery\_frequency](#input\_delivery\_frequency) | frequency for the config snapshots to be sent to S3 | `string` | `"TwentyFour_Hours"` | no |
 | <a name="input_deployment_type"></a> [deployment\_type](#input\_deployment\_type) | Deployment type: ORGANIZATION or STANDALONE | `string` | `"ORGANIZATION"` | no |
+| <a name="input_enable_config"></a> [enable\_config](#input\_enable\_config) | Flag to enable or disable the deployment of AWS Config resources. Set to false to skip creating Config-related infrastructure. | `bool` | `true` | no |
 | <a name="input_is_gov"></a> [is\_gov](#input\_is\_gov) | AWS Config deployed in Gov account? | `bool` | `true` | no |
 | <a name="input_is_org"></a> [is\_org](#input\_is\_org) | Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments. | `bool` | `true` | no |
 | <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | KMS key for S3 | `string` | `null` | no |
+| <a name="input_org_management_account_id"></a> [org\_management\_account\_id](#input\_org\_management\_account\_id) | The AWS account number of the AWS Organization management (root) account. | `string` | n/a | yes |
 | <a name="input_organization_id"></a> [organization\_id](#input\_organization\_id) | AWS Organization ID to restrict IAM policies or bucket policies | `string` | `null` | no |
 | <a name="input_packs_s3_key"></a> [packs\_s3\_key](#input\_packs\_s3\_key) | S3 Bucket prefix for the Packs uploaded | `string` | `"packs"` | no |
 | <a name="input_profile"></a> [profile](#input\_profile) | The AWS profile aligned with the AWS environment to deploy to | `string` | `null` | no |
