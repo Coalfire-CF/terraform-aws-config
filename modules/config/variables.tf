@@ -109,6 +109,24 @@ variable "s3_kms_key_arn" {
 
 ## CONFIGURATION PARAMETERS ##
 
+variable "create_config_in_admin" {
+  description = "Whether to create the AWS Config recorder + delivery channel in the delegated admin account"
+  type        = bool
+  default     = false
+}
+
+variable "create_config_recorder" {
+  description = "Whether to create Config Recorder (false will use existing detector)"
+  type        = bool
+  default     = true
+}
+
+variable "create_delivery_channel" {
+  description = "Whether to create Config Delivery Channel (false will use existing detector)"
+  type        = bool
+  default     = true
+}
+
 variable "delivery_frequency" {
   description = "Frequency for the config snapshots to be sent to S3"
   type        = string

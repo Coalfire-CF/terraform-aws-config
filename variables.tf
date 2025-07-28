@@ -141,6 +141,23 @@ variable "aggregation_type" {
 }
 
 # Deployment Configuration
+variable "create_config_in_admin" {
+  type    = bool
+  default = true
+}
+
+variable "create_config_recorder" {
+  description = "Whether to create Config Recorder (false will use existing detector)"
+  type        = bool
+  default     = true
+}
+
+variable "create_delivery_channel" {
+  description = "Whether to create Config Delivery Channel (false will use existing detector)"
+  type        = bool
+  default     = true
+}
+
 variable "deployment_type" {
   description = "Deployment type: ORGANIZATION or STANDALONE"
   type        = string
