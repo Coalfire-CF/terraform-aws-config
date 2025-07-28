@@ -14,7 +14,7 @@ module "organization_admin" {
 module "config_baseline" {
   source = "./modules/config"
 
-  count                   = (local.is_member_account|| local.is_delegated_admin_account) ? 1 : 0
+  count                   = (local.is_member_account || local.is_delegated_admin_account) ? 1 : 0
   create_config_in_admin  = local.is_member_account || (local.is_delegated_admin_account && var.create_config_in_admin)
   create_config_recorder  = local.should_create_recorder
   create_delivery_channel = local.should_create_delivery_channel
@@ -25,7 +25,7 @@ module "config_baseline" {
   is_org                  = var.is_org
   organization_id         = var.organization_id
   account_number          = var.account_number
-  role_arn                = module.config_baseline.config_iam_role_arn
+  role_arn                = module.config_baseline[0].config_iam_role_arn
   s3_bucket_id            = var.s3_config_id
   s3_config_arn           = var.s3_config_arn
   s3_key_prefix           = var.s3_key_prefix

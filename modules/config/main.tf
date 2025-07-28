@@ -1,12 +1,6 @@
-# Check for existing Config Recorder
-data "aws_config_configuration_recorder" "existing" {
-  count = var.create_config_recorder ? 0 : 1
-  name  = "default"
-}
-
 # Create the AWS Config recorder to track configuration changes
 resource "aws_config_configuration_recorder" "config" {
-  count    = var.create_config_recorder ? 1 : 0
+  count    = local.should_create_recorder ? 1 : 0
   name     = "${var.resource_prefix}-config"         # Custom name for recorder
   role_arn = aws_iam_role.custom_aws_config_role.arn # IAM role AWS Config assumes
 
@@ -16,15 +10,9 @@ resource "aws_config_configuration_recorder" "config" {
   }
 }
 
-# Check for existing Config Delivery Channel
-data "aws_config_delivery_channel" "existing" {
-  count = var.create_delivery_channel ? 0 : 1
-  name  = "default"
-}
-
 # Create the delivery channel to send Config data to S3 and SNS
 resource "aws_config_delivery_channel" "config" {
-  count          = var.create_delivery_channel ? 0 : 1
+  count          = local.should_create_delivery_channel ? 0 : 1
   name           = "${var.resource_prefix}-config-delivery" # Custom name for delivery channel
   s3_bucket_name = var.s3_bucket_id                         # Destination S3 bucket
   s3_key_prefix  = var.s3_key_prefix
@@ -48,7 +36,7 @@ resource "aws_sns_topic" "config_delivery" {
 
 # Enable the configuration recorder
 resource "aws_config_configuration_recorder_status" "config" {
-  name       = aws_config_configuration_recorder.config.name # Recorder to enable
-  is_enabled = true                                          # Start recording
+  name       = aws_config_configuration_recorder.config[0].name # Recorder to enable
+  is_enabled = true                                             # Start recording
   depends_on = [aws_config_delivery_channel.config]
 }

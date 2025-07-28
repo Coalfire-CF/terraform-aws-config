@@ -12,17 +12,17 @@ output "delegation_delay_id" {
 # Outputs from config_baseline module (Config recorder and delivery)
 output "config_recorder_name" {
   description = "Name of the AWS Config configuration recorder"
-  value       = module.config_baseline.config_recorder_name
+  value       = module.config_baseline[0].config_recorder_name
 }
 
 output "delivery_channel_name" {
   description = "Name of the AWS Config delivery channel"
-  value       = module.config_baseline.delivery_channel_name
+  value       = module.config_baseline[0].delivery_channel_name
 }
 
 output "config_delivery_bucket" {
   description = "S3 bucket used for AWS Config snapshot delivery"
-  value       = module.config_baseline.config_delivery_bucket
+  value       = module.config_baseline[0].config_delivery_bucket
 }
 
 # Outputs from conformance_packs module

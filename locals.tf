@@ -15,16 +15,16 @@ locals {
 
   # Config Recorder Creation Logic
   should_create_recorder = (
-    local.is_standalone_deployment        ## Standalone account (not part of AWS Org)
-    || local.is_delegated_admin_account   ## Delegated admin account within the Org
-    || local.is_org_management_account    ## Org root / management account
+    local.is_standalone_deployment      ## Standalone account (not part of AWS Org)
+    || local.is_delegated_admin_account ## Delegated admin account within the Org
+    || local.is_org_management_account  ## Org root / management account
   )
 
-    # Config Recorder Creation Logic
+  # Config Recorder Creation Logic
   should_create_delivery_channel = (
-    local.is_standalone_deployment        ## Standalone account (not part of AWS Org)
-    || local.is_delegated_admin_account   ## Delegated admin account within the Org
-    || local.is_org_management_account    ## Org root / management account
+    local.is_standalone_deployment      ## Standalone account (not part of AWS Org)
+    || local.is_delegated_admin_account ## Delegated admin account within the Org
+    || local.is_org_management_account  ## Org root / management account
   )
 
   # Resource naming

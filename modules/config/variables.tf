@@ -143,3 +143,25 @@ variable "create_sns_topic" {
   description = "Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed."
   type        = bool
 }
+
+variable "role" {
+  description = "Role of this account: ORG_MANAGEMENT, DELEGATED_ADMIN, or MEMBER"
+  type        = string
+  default     = "MEMBER"
+
+  validation {
+    condition     = contains(["ORG_MANAGEMENT", "DELEGATED_ADMIN", "MEMBER"], var.role)
+    error_message = "role must be ORG_MANAGEMENT, DELEGATED_ADMIN, or MEMBER"
+  }
+}
+
+variable "deployment_type" {
+  description = "Deployment type: ORGANIZATION or STANDALONE"
+  type        = string
+  default     = "ORGANIZATION"
+
+  validation {
+    condition     = contains(["ORGANIZATION", "STANDALONE"], var.deployment_type)
+    error_message = "deployment_type must be either ORGANIZATION or STANDALONE"
+  }
+}

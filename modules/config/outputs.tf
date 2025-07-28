@@ -2,22 +2,12 @@
 
 output "config_recorder_name" {
   description = "The name of the AWS Config configuration recorder"
-  value       = aws_config_configuration_recorder.config.name
-}
-
-output "config_recorder_id" {
-  description = "The ID of the AWS Config configuration recorder"
-  value = local.recorder_id
+  value       = aws_config_configuration_recorder.config[0].name
 }
 
 output "delivery_channel_name" {
   description = "The name of the AWS Config delivery channel"
-  value       = aws_config_delivery_channel.config.name
-}
-
-output "delivery_channel_id" {
-  description = "The ID of the AWS Config delivery channel"
-  value = local.delivery_channel_id
+  value       = aws_config_delivery_channel.config[0].name
 }
 
 output "config_delivery_bucket" {
