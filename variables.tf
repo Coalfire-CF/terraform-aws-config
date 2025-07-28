@@ -36,9 +36,13 @@ variable "delegated_org_account_id" {
 }
 
 variable "account_number" {
-  description = "The AWS account number resources are being deployed into"
+  description = "The AWS account number where this Terraform deployment is running."
   type        = string
-  default     = null
+}
+
+variable "org_management_account_id" {
+  description = "The AWS account number of the AWS Organization management (root) account."
+  type        = string
 }
 
 variable "resource_prefix" {
@@ -153,19 +157,27 @@ variable "aggregation_type" {
 }
 
 # Deployment Configuration
+
+variable "enable_config" {
+  description = "Flag to enable or disable the deployment of AWS Config resources. Set to false to skip creating Config-related infrastructure."
+  type        = bool
+  default     = true
+}
+
 variable "create_config_in_admin" {
-  type    = bool
-  default = true
+  description = "Determines whether to create AWS Config resources specifically in the delegated admin account. Set to true to enable creation in the delegated admin, false to skip."
+  type        = bool
+  default     = true
 }
 
 variable "create_config_recorder" {
-  description = "Whether to create Config Recorder (false will use existing detector)"
+  description = "Whether to create Config Recorder"
   type        = bool
   default     = true
 }
 
 variable "create_delivery_channel" {
-  description = "Whether to create Config Delivery Channel (false will use existing detector)"
+  description = "Whether to create Config Delivery Channel"
   type        = bool
   default     = true
 }
@@ -196,4 +208,10 @@ variable "create_sns_topic" {
   description = "Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed."
   type        = bool
   default     = false
+}
+
+variable "config_role_arn" {
+  description = "Optional ARN of an IAM Role to use for AWS Config. If not provided, the module can create one."
+  type        = string
+  default     = null
 }
