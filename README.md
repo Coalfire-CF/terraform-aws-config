@@ -151,35 +151,34 @@ SSO-based authentication (via IAM Identity Center SSO):
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_account_number"></a> [account\_number](#input\_account\_number) | The AWS account number resources are being deployed into | `string` | n/a | yes |
-| <a name="input_aggregation_type"></a> [aggregation\_type](#input\_aggregation\_type) | Aggregation Type | `string` | n/a | yes |
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region for AWS Config Delegated Admin | `string` | n/a | yes |
-| <a name="input_aws_regions"></a> [aws\_regions](#input\_aws\_regions) | The AWS region(s) for AWS Config Aggregator | `list(string)` | n/a | yes |
-| <a name="input_config_kms_key_arn"></a> [config\_kms\_key\_arn](#input\_config\_kms\_key\_arn) | AWS Config KMS Key Arn | `string` | n/a | yes |
-| <a name="input_conformance_pack_names"></a> [conformance\_pack\_names](#input\_conformance\_pack\_names) | A list of conformance pack names to be deployed | `list(string)` | n/a | yes |
+| <a name="input_account_number"></a> [account\_number](#input\_account\_number) | The AWS account number resources are being deployed into | `string` | `null` | no |
+| <a name="input_aggregation_type"></a> [aggregation\_type](#input\_aggregation\_type) | Aggregation Type | `string` | `"organization"` | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region for AWS Config Delegated Admin | `string` | `null` | no |
+| <a name="input_aws_regions"></a> [aws\_regions](#input\_aws\_regions) | The AWS region(s) for AWS Config Aggregator | `list(string)` | `null` | no |
+| <a name="input_config_kms_key_arn"></a> [config\_kms\_key\_arn](#input\_config\_kms\_key\_arn) | AWS Config KMS Key Arn | `string` | `null` | no |
+| <a name="input_conformance_pack_names"></a> [conformance\_pack\_names](#input\_conformance\_pack\_names) | A list of conformance pack names to be deployed | `list(string)` | <pre>[<br/>  "Operational-Best-Practices-for-FedRAMP",<br/>  "Operational-Best-Practices-for-NIST-800-53-rev-5"<br/>]</pre> | no |
 | <a name="input_create_config_in_admin"></a> [create\_config\_in\_admin](#input\_create\_config\_in\_admin) | Deployment Configuration | `bool` | `true` | no |
 | <a name="input_create_config_recorder"></a> [create\_config\_recorder](#input\_create\_config\_recorder) | Whether to create Config Recorder (false will use existing detector) | `bool` | `true` | no |
 | <a name="input_create_delivery_channel"></a> [create\_delivery\_channel](#input\_create\_delivery\_channel) | Whether to create Config Delivery Channel (false will use existing detector) | `bool` | `true` | no |
-| <a name="input_create_sns_topic"></a> [create\_sns\_topic](#input\_create\_sns\_topic) | Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed. | `bool` | n/a | yes |
-| <a name="input_default_aws_region"></a> [default\_aws\_region](#input\_default\_aws\_region) | The default AWS region to create resources in | `string` | n/a | yes |
+| <a name="input_create_sns_topic"></a> [create\_sns\_topic](#input\_create\_sns\_topic) | Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed. | `bool` | `false` | no |
+| <a name="input_default_aws_region"></a> [default\_aws\_region](#input\_default\_aws\_region) | The default AWS region to create resources in | `string` | `null` | no |
 | <a name="input_delegated_org_account_id"></a> [delegated\_org\_account\_id](#input\_delegated\_org\_account\_id) | AWS Account ID to designate as Config delegated administrator | `string` | `null` | no |
-| <a name="input_delivery_frequency"></a> [delivery\_frequency](#input\_delivery\_frequency) | frequency for the config snapshots to be sent to S3 | `string` | n/a | yes |
+| <a name="input_delivery_frequency"></a> [delivery\_frequency](#input\_delivery\_frequency) | frequency for the config snapshots to be sent to S3 | `string` | `"TwentyFour_Hours"` | no |
 | <a name="input_deployment_type"></a> [deployment\_type](#input\_deployment\_type) | Deployment type: ORGANIZATION or STANDALONE | `string` | `"ORGANIZATION"` | no |
-| <a name="input_is_gov"></a> [is\_gov](#input\_is\_gov) | AWS Config deployed in Gov account? | `bool` | n/a | yes |
-| <a name="input_is_org"></a> [is\_org](#input\_is\_org) | Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments. | `bool` | n/a | yes |
-| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | KMS key for S3 | `string` | n/a | yes |
-| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix for resource names | `string` | n/a | yes |
+| <a name="input_is_gov"></a> [is\_gov](#input\_is\_gov) | AWS Config deployed in Gov account? | `bool` | `true` | no |
+| <a name="input_is_org"></a> [is\_org](#input\_is\_org) | Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments. | `bool` | `true` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | KMS key for S3 | `string` | `null` | no |
 | <a name="input_organization_id"></a> [organization\_id](#input\_organization\_id) | AWS Organization ID to restrict IAM policies or bucket policies | `string` | `null` | no |
 | <a name="input_packs_s3_key"></a> [packs\_s3\_key](#input\_packs\_s3\_key) | S3 Bucket prefix for the Packs uploaded | `string` | `"packs"` | no |
-| <a name="input_profile"></a> [profile](#input\_profile) | The AWS profile aligned with the AWS environment to deploy to | `string` | n/a | yes |
-| <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | The prefix for the s3 bucket names | `string` | n/a | yes |
+| <a name="input_profile"></a> [profile](#input\_profile) | The AWS profile aligned with the AWS environment to deploy to | `string` | `null` | no |
+| <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | The prefix for resource names | `string` | `null` | no |
 | <a name="input_role"></a> [role](#input\_role) | Role of this account: ORG\_MANAGEMENT, DELEGATED\_ADMIN, or MEMBER | `string` | `"MEMBER"` | no |
-| <a name="input_s3_accesslog_bucket_name"></a> [s3\_accesslog\_bucket\_name](#input\_s3\_accesslog\_bucket\_name) | S3 Access Log Bucket Name | `string` | n/a | yes |
-| <a name="input_s3_config_arn"></a> [s3\_config\_arn](#input\_s3\_config\_arn) | S3 Bucket ARN for AWS Config | `string` | n/a | yes |
-| <a name="input_s3_config_id"></a> [s3\_config\_id](#input\_s3\_config\_id) | S3 bucket ID for AWS Config | `string` | n/a | yes |
-| <a name="input_s3_key_prefix"></a> [s3\_key\_prefix](#input\_s3\_key\_prefix) | Prefix within the S3 bucket for AWS Config to write data | `string` | n/a | yes |
-| <a name="input_s3_kms_key_arn"></a> [s3\_kms\_key\_arn](#input\_s3\_kms\_key\_arn) | AWS S3 KMS Key Arn | `string` | n/a | yes |
-| <a name="input_sns_kms_key_id"></a> [sns\_kms\_key\_id](#input\_sns\_kms\_key\_id) | SNS KMS key ID | `string` | n/a | yes |
+| <a name="input_s3_accesslog_bucket_name"></a> [s3\_accesslog\_bucket\_name](#input\_s3\_accesslog\_bucket\_name) | S3 Access Log Bucket Name | `string` | `null` | no |
+| <a name="input_s3_config_arn"></a> [s3\_config\_arn](#input\_s3\_config\_arn) | S3 Bucket ARN for AWS Config | `string` | `null` | no |
+| <a name="input_s3_config_id"></a> [s3\_config\_id](#input\_s3\_config\_id) | S3 bucket ID for AWS Config | `string` | `null` | no |
+| <a name="input_s3_key_prefix"></a> [s3\_key\_prefix](#input\_s3\_key\_prefix) | Prefix within the S3 bucket for AWS Config to write data | `string` | `"config"` | no |
+| <a name="input_s3_kms_key_arn"></a> [s3\_kms\_key\_arn](#input\_s3\_kms\_key\_arn) | AWS S3 KMS Key Arn | `string` | `null` | no |
+| <a name="input_sns_kms_key_id"></a> [sns\_kms\_key\_id](#input\_sns\_kms\_key\_id) | SNS KMS key ID | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
 
 ## Outputs
