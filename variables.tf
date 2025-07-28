@@ -40,7 +40,7 @@ variable "account_number" {
   description = "The AWS account number resources are being deployed into"
   type        = string
   default     = null
-  
+
   validation {
     condition     = can(regex("^[0-9]{12}$", var.account_number))
     error_message = "account_number must be a valid 12-digit AWS account ID"
@@ -203,5 +203,5 @@ variable "create_sns_topic" {
   description = "Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed."
   type        = bool
   default     = false
-  
+
 }
