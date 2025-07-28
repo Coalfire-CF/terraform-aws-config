@@ -153,7 +153,7 @@ SSO-based authentication (via IAM Identity Center SSO):
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_number"></a> [account\_number](#input\_account\_number) | The AWS account number resources are being deployed into | `string` | `null` | no |
 | <a name="input_aggregation_type"></a> [aggregation\_type](#input\_aggregation\_type) | Aggregation Type | `string` | `"organization"` | no |
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region for AWS Config Delegated Admin | `string` | `null` | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region for AWS Config Delegated Admin | `string` | n/a | yes |
 | <a name="input_aws_regions"></a> [aws\_regions](#input\_aws\_regions) | The AWS region(s) for AWS Config Aggregator | `list(string)` | `null` | no |
 | <a name="input_config_kms_key_arn"></a> [config\_kms\_key\_arn](#input\_config\_kms\_key\_arn) | AWS Config KMS Key Arn | `string` | `null` | no |
 | <a name="input_conformance_pack_names"></a> [conformance\_pack\_names](#input\_conformance\_pack\_names) | A list of conformance pack names to be deployed | `list(string)` | <pre>[<br/>  "Operational-Best-Practices-for-FedRAMP",<br/>  "Operational-Best-Practices-for-NIST-800-53-rev-5"<br/>]</pre> | no |
@@ -171,7 +171,7 @@ SSO-based authentication (via IAM Identity Center SSO):
 | <a name="input_organization_id"></a> [organization\_id](#input\_organization\_id) | AWS Organization ID to restrict IAM policies or bucket policies | `string` | `null` | no |
 | <a name="input_packs_s3_key"></a> [packs\_s3\_key](#input\_packs\_s3\_key) | S3 Bucket prefix for the Packs uploaded | `string` | `"packs"` | no |
 | <a name="input_profile"></a> [profile](#input\_profile) | The AWS profile aligned with the AWS environment to deploy to | `string` | `null` | no |
-| <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | The prefix for resource names | `string` | `null` | no |
+| <a name="input_resource_prefix"></a> [resource\_prefix](#input\_resource\_prefix) | The prefix for resource names | `string` | n/a | yes |
 | <a name="input_role"></a> [role](#input\_role) | Role of this account: ORG\_MANAGEMENT, DELEGATED\_ADMIN, or MEMBER | `string` | `"MEMBER"` | no |
 | <a name="input_s3_accesslog_bucket_name"></a> [s3\_accesslog\_bucket\_name](#input\_s3\_accesslog\_bucket\_name) | S3 Access Log Bucket Name | `string` | `null` | no |
 | <a name="input_s3_config_arn"></a> [s3\_config\_arn](#input\_s3\_config\_arn) | S3 Bucket ARN for AWS Config | `string` | `null` | no |
