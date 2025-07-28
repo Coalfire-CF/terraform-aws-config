@@ -19,6 +19,7 @@ variable "all_regions" {
 variable "resource_prefix" {
   description = "The prefix for the s3 bucket names"
   type        = string
+  default     = null
 }
 
 variable "is_gov" {
@@ -30,11 +31,13 @@ variable "is_gov" {
 variable "is_org" {
   description = "Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments."
   type        = bool
+  default     = true
 }
 
 variable "account_number" {
   description = "The AWS account number resources are being deployed into"
   type        = string
+  default     = null
 }
 
 variable "tags" {
@@ -46,6 +49,7 @@ variable "tags" {
 variable "role_arn" {
   description = "The ARN of the IAM role to be assumed by AWS Config for recording configuration changes or aggregation."
   type        = string
+  default     = null
 }
 
 ## AGGREGATOR CONFIGURATION ## 
@@ -78,16 +82,19 @@ variable "organization_id" {
 variable "s3_bucket_id" {
   description = "Name of the S3 bucket for AWS Config delivery channel"
   type        = string
+  default     = null
 }
 
 variable "s3_config_arn" {
   description = "S3 Bucket ARN for AWS Config"
   type        = string
+  default     = null
 }
 
 variable "s3_key_prefix" {
   description = "Prefix within the S3 bucket for AWS Config to write data"
   type        = string
+  default     = null
 }
 
 ## KMS CONFIGURATION ## 
@@ -95,16 +102,19 @@ variable "s3_key_prefix" {
 variable "sns_kms_key_id" {
   description = "SNS KMS key ID"
   type        = string
+  default     = null
 }
 
 variable "config_kms_key_arn" {
   description = "AWS Config KMS Key Arn"
   type        = string
+  default     = null
 }
 
 variable "s3_kms_key_arn" {
   description = "AWS S3 KMS Key Arn"
   type        = string
+  default     = null
 }
 
 ## CONFIGURATION PARAMETERS ##
@@ -142,6 +152,7 @@ variable "delivery_frequency" {
 variable "create_sns_topic" {
   description = "Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed."
   type        = bool
+  default     = false
 }
 
 variable "role" {

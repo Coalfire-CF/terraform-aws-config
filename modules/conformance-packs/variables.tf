@@ -1,8 +1,9 @@
 ## GLOBAL / ENVIRONMENT VARIABLES ##
 
-variable "is_org" {
-  description = "Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments."
-  type        = bool
+variable "default_aws_region" {
+  description = "The default AWS region to create resources in"
+  type        = string
+  default     = false
 }
 
 variable "aws_region" {
@@ -10,9 +11,10 @@ variable "aws_region" {
   type        = string
 }
 
-variable "default_aws_region" {
-  description = "The default AWS region to create resources in"
-  type        = string
+variable "is_org" {
+  description = "Set to true if deploying AWS Config using AWS Organizations with a delegated administrator. When true, organization-level resources such as organization conformance packs and aggregators will be created. Set to false for standalone (non-org) account deployments."
+  type        = bool
+  default     = true
 }
 
 variable "account_number" {
@@ -29,7 +31,6 @@ variable "application_account_numbers" {
 variable "organization_id" {
   description = "AWS Organization ID"
   type        = string
-  default     = null
 }
 
 variable "resource_prefix" {
