@@ -157,6 +157,9 @@ SSO-based authentication (via IAM Identity Center SSO):
 | <a name="input_aws_regions"></a> [aws\_regions](#input\_aws\_regions) | The AWS region(s) for AWS Config Aggregator | `list(string)` | n/a | yes |
 | <a name="input_config_kms_key_arn"></a> [config\_kms\_key\_arn](#input\_config\_kms\_key\_arn) | AWS Config KMS Key Arn | `string` | n/a | yes |
 | <a name="input_conformance_pack_names"></a> [conformance\_pack\_names](#input\_conformance\_pack\_names) | A list of conformance pack names to be deployed | `list(string)` | n/a | yes |
+| <a name="input_create_config_in_admin"></a> [create\_config\_in\_admin](#input\_create\_config\_in\_admin) | Deployment Configuration | `bool` | `true` | no |
+| <a name="input_create_config_recorder"></a> [create\_config\_recorder](#input\_create\_config\_recorder) | Whether to create Config Recorder (false will use existing detector) | `bool` | `true` | no |
+| <a name="input_create_delivery_channel"></a> [create\_delivery\_channel](#input\_create\_delivery\_channel) | Whether to create Config Delivery Channel (false will use existing detector) | `bool` | `true` | no |
 | <a name="input_create_sns_topic"></a> [create\_sns\_topic](#input\_create\_sns\_topic) | Whether to create the SNS topic for AWS Config notifications. Set to false if an external topic is used or notifications are not needed. | `bool` | n/a | yes |
 | <a name="input_default_aws_region"></a> [default\_aws\_region](#input\_default\_aws\_region) | The default AWS region to create resources in | `string` | n/a | yes |
 | <a name="input_delegated_org_account_id"></a> [delegated\_org\_account\_id](#input\_delegated\_org\_account\_id) | AWS Account ID to designate as Config delegated administrator | `string` | `null` | no |
