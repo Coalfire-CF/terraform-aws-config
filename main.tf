@@ -51,6 +51,7 @@ module "conformance_packs" {
   packs_s3_key             = var.packs_s3_key
   kms_key_id               = var.sns_kms_key_id
   is_org                   = var.is_org
+  organization_id          = var.organization_id
   pack_names               = var.conformance_pack_names
   s3_bucket_id             = var.s3_config_id
   s3_accesslog_bucket_name = var.s3_accesslog_bucket_name
