@@ -40,11 +40,6 @@ variable "account_number" {
   description = "The AWS account number resources are being deployed into"
   type        = string
   default     = null
-  
-  validation {
-    condition     = can(regex("^[0-9]{12}$", var.account_number))
-    error_message = "account_number must be a valid 12-digit AWS account ID"
-  }
 }
 
 variable "resource_prefix" {
