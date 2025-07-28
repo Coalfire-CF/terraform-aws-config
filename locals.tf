@@ -28,7 +28,7 @@ locals {
   )
 
   # Resource naming
-  name_prefix = var.resource_prefix != "" ? "${var.resource_prefix}-" : ""
+ resource_prefix = var.resource_prefix != "" ? "${var.resource_prefix}-" : ""
 
   # Common resource tags
   module_tags = {
