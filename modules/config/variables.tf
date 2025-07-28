@@ -19,7 +19,6 @@ variable "all_regions" {
 variable "resource_prefix" {
   description = "The prefix for the s3 bucket names"
   type        = string
-  default     = null
 }
 
 variable "is_gov" {
@@ -82,7 +81,6 @@ variable "organization_id" {
 variable "s3_bucket_id" {
   description = "Name of the S3 bucket for AWS Config delivery channel"
   type        = string
-  default     = null
 }
 
 variable "s3_config_arn" {

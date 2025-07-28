@@ -3,7 +3,6 @@
 variable "aws_region" {
   description = "The AWS region for AWS Config Delegated Admin"
   type        = string
-  default     = null
 }
 
 variable "aws_regions" {
@@ -45,7 +44,6 @@ variable "account_number" {
 variable "resource_prefix" {
   description = "The prefix for resource names"
   type        = string
-  default     = null
 }
 
 variable "profile" {
