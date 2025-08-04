@@ -1,6 +1,6 @@
 # Create the AWS Config recorder to track configuration changes
 resource "aws_config_configuration_recorder" "config" {
-  count    = local.should_create_recorder ? 1 : 0
+  count = var.create_config_recorder ? 1 : 0
   name     = "${var.resource_prefix}-config"         # Custom name for recorder
   role_arn = aws_iam_role.custom_aws_config_role.arn # IAM role AWS Config assumes
 
@@ -37,7 +37,7 @@ resource "aws_sns_topic" "config_delivery" {
 # Enable the configuration recorder
 resource "aws_config_configuration_recorder_status" "config" {
   count = var.create_config_recorder ? 1 : 0
-  name       = aws_config_configuration_recorder.config[0].name # Recorder to enable
-  is_enabled = true                                             # Start recording
+  name       = aws_config_configuration_recorder.config[count.index].name
+  is_enabled = true
   depends_on = [aws_config_delivery_channel.config]
 }
