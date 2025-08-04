@@ -36,6 +36,7 @@ resource "aws_sns_topic" "config_delivery" {
 
 # Enable the configuration recorder
 resource "aws_config_configuration_recorder_status" "config" {
+  count = var.create_config_recorder ? 1 : 0
   name       = aws_config_configuration_recorder.config[0].name # Recorder to enable
   is_enabled = true                                             # Start recording
   depends_on = [aws_config_delivery_channel.config]
