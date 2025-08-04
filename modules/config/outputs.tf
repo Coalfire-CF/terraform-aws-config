@@ -2,7 +2,7 @@
 
 output "config_recorder_name" {
   description = "The name of the AWS Config configuration recorder"
-  value       = aws_config_configuration_recorder.config[0].name
+  value = length(aws_config_configuration_recorder.config) > 0 ? aws_config_configuration_recorder.config[0].name : ""
 }
 
 output "delivery_channel_name" {
