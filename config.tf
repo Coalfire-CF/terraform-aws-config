@@ -39,5 +39,5 @@ resource "aws_config_conformance_pack" "conformance_packs" {
   delivery_s3_bucket = var.s3_config_id
   template_s3_uri    = "s3://${var.s3_config_id}/${var.packs_s3_key}/${var.conformance_pack_names[count.index]}.yaml"
 
-  depends_on = var.upload_conformance_objects ? [aws_s3_object.fedramp, aws_s3_object.nist] : []
+  depends_on = [aws_s3_object.fedramp, aws_s3_object.nist]
 }
