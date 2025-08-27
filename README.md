@@ -180,6 +180,7 @@ No modules.
 | <a name="input_s3_config_id"></a> [s3\_config\_id](#input\_s3\_config\_id) | S3 bucket ID for AWS Config | `string` | n/a | yes |
 | <a name="input_s3_kms_key_arn"></a> [s3\_kms\_key\_arn](#input\_s3\_kms\_key\_arn) | AWS S3 KMS Key Arn | `string` | n/a | yes |
 | <a name="input_sns_kms_key_id"></a> [sns\_kms\_key\_id](#input\_sns\_kms\_key\_id) | SNS KMS key ID | `string` | n/a | yes |
+| <a name="input_upload_conformance_objects"></a> [upload\_conformance\_objects](#input\_upload\_conformance\_objects) | Determines whether or not conformance objects should be created. False if just deploying aws-config to org accounts (not delegated admin account. | `bool` | `true` | no |
 
 ## Outputs
 
