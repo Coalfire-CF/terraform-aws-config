@@ -33,7 +33,7 @@ resource "aws_config_configuration_recorder_status" "config" {
 }
 
 resource "aws_config_conformance_pack" "conformance_packs" {
-  count = length(var.conformance_pack_names)
+  count = var.create_conformance_packs ? length(var.conformance_pack_names) : 0
 
   name               = var.conformance_pack_names[count.index]
   delivery_s3_bucket = var.s3_config_id
