@@ -96,3 +96,9 @@ variable "upload_conformance_objects" {
   type    = bool
   default = true
 }
+
+variable "create_conformance_packs" {
+  description = "Determines whether or not to cerate the conformance paks. False if deploying aws-config to single, non-delegated admin account."
+  type    = bool
+  default = true
+}
