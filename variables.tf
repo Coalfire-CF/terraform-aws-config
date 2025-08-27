@@ -90,3 +90,15 @@ variable "aggregation_type" {
     error_message = "Valid values for var: account or organization."
   }
 }
+
+variable "upload_conformance_objects" {
+  description = "Determines whether or not conformance objects should be created. False if just deploying aws-config to org accounts (not delegated admin account."
+  type    = bool
+  default = true
+}
+
+variable "create_conformance_packs" {
+  description = "Determines whether or not to cerate the conformance paks. False if deploying aws-config to single, non-delegated admin account."
+  type    = bool
+  default = true
+}
