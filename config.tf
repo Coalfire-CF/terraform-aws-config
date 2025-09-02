@@ -16,7 +16,7 @@ resource "aws_sns_topic" "config_delivery" {
 }
 
 resource "aws_config_delivery_channel" "config" {
-  name           = "${var.resource_prefix}-config-delivery-${var.aws_region}"
+  name           = "${var.resource_prefix}-config-delivery-${data.aws_region.current.name}"
   s3_bucket_name = var.s3_config_id
   sns_topic_arn  = length(aws_sns_topic.config_delivery) > 0 ? aws_sns_topic.config_delivery[0].arn : null
 
