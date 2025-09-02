@@ -36,18 +36,18 @@ data "aws_iam_policy_document" "kms_role_policy" {
 }
 
 resource "aws_iam_role" "custom_aws_config_role" {
-  name               = "AWSConfigCustomRole-${var.aws_region}"
+  name               = "AWSConfigCustomRole-${data.aws_region.current.name}"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_iam_role_policy" "s3_config_role_policy" {
-  name   = "AWSConfigS3RolePolicy-${var.aws_region}"
+  name   = "AWSConfigS3RolePolicy-${data.aws_region.current.name}"
   role   = aws_iam_role.custom_aws_config_role.id
   policy = data.aws_iam_policy_document.s3_role_policy.json
 }
 
 resource "aws_iam_role_policy" "kms_config_role_policy" {
-  name   = "AWSConfigKMSRolePolicy-${var.aws_region}"
+  name   = "AWSConfigKMSRolePolicy-${data.aws_region.current.name}"
   role   = aws_iam_role.custom_aws_config_role.id
   policy = data.aws_iam_policy_document.kms_role_policy.json
 }
