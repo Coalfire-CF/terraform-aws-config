@@ -1,6 +1,10 @@
+locals {
+  config_role_arn = var.create_iam_role ? aws_iam_role.custom_aws_config_role[0].arn : var.existing_config_role_arn
+}
+
 resource "aws_config_configuration_recorder" "config" {
   name     = "${var.resource_prefix}-config"
-  role_arn = aws_iam_role.custom_aws_config_role.arn
+  role_arn = local.config_role_arn
 
   recording_group {
     all_supported                 = true
