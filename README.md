@@ -168,7 +168,6 @@ No modules.
 | <a name="input_account_ids"></a> [account\_ids](#input\_account\_ids) | If Aggregating by Account - AWS Account IDs for AWS Config Aggregator | `list(string)` | <pre>[<br/>  ""<br/>]</pre> | no |
 | <a name="input_aggregation_type"></a> [aggregation\_type](#input\_aggregation\_type) | Aggregation Type | `string` | n/a | yes |
 | <a name="input_all_regions"></a> [all\_regions](#input\_all\_regions) | AWS Config Aggregator pulls from all AWS Regions | `bool` | `false` | no |
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region to create resources in. | `string` | n/a | yes |
 | <a name="input_aws_regions"></a> [aws\_regions](#input\_aws\_regions) | The AWS region(s) for AWS Config Aggregator | `list(string)` | n/a | yes |
 | <a name="input_config_kms_key_arn"></a> [config\_kms\_key\_arn](#input\_config\_kms\_key\_arn) | AWS Config KMS Key Arn | `string` | n/a | yes |
 | <a name="input_conformance_pack_names"></a> [conformance\_pack\_names](#input\_conformance\_pack\_names) | A list of conformance pack names to be deployed | `list(string)` | n/a | yes |
