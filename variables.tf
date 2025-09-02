@@ -9,11 +9,6 @@ variable "all_regions" {
   default     = false
 }
 
-variable "aws_region" {
-  description = "The AWS region to create resources in."
-  type        = string
-}
-
 variable "is_gov" {
   description = "AWS Config deployed in Gov account?"
   type        = bool
