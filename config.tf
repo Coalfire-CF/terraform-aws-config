@@ -10,14 +10,15 @@ resource "aws_config_configuration_recorder" "config" {
 }
 
 resource "aws_sns_topic" "config_delivery" {
+  count             = var.aws_region == "us-gov-west-1" ? 1 : 0
   name              = "${var.resource_prefix}-sns-config"
   kms_master_key_id = var.sns_kms_key_id
 }
 
 resource "aws_config_delivery_channel" "config" {
-  name           = "${var.resource_prefix}-config-delivery"
+  name           = "${var.resource_prefix}-config-delivery-${var.aws_region}"
   s3_bucket_name = var.s3_config_id
-  sns_topic_arn  = aws_sns_topic.config_delivery.arn
+  sns_topic_arn  = length(aws_sns_topic.config_delivery) > 0 ? aws_sns_topic.config_delivery[0].arn : null
 
   snapshot_delivery_properties {
     delivery_frequency = var.delivery_frequency
