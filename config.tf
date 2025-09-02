@@ -10,7 +10,7 @@ resource "aws_config_configuration_recorder" "config" {
 }
 
 resource "aws_sns_topic" "config_delivery" {
-  count             = var.aws_region == "us-gov-west-1" ? 1 : 0
+  count             = data.aws_region.current.name == "us-gov-west-1" ? 1 : 0
   name              = "${var.resource_prefix}-sns-config"
   kms_master_key_id = var.sns_kms_key_id
 }
