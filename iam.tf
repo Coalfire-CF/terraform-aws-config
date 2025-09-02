@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "kms_role_policy" {
 }
 
 resource "aws_iam_role" "custom_aws_config_role" {
-  name               = "AWSConfigCustomRole"
+  name               = "AWSConfigCustomRole-${"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
