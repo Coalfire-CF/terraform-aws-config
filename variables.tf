@@ -90,3 +90,8 @@ variable "aggregation_type" {
     error_message = "Valid values for var: account or organization."
   }
 }
+
+variable "aws_region" {
+  description = "The AWS region to create resources in."
+  type        = string
+}
