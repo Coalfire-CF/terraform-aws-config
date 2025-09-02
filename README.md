@@ -187,7 +187,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_config_role_arn"></a> [config\_role\_arn](#output\_config\_role\_arn) | ARN of the AWS Config IAM role |
 | <a name="output_fedramp_conformance_pack_arn"></a> [fedramp\_conformance\_pack\_arn](#output\_fedramp\_conformance\_pack\_arn) | n/a |
 | <a name="output_nist_conformance_pack_arn"></a> [nist\_conformance\_pack\_arn](#output\_nist\_conformance\_pack\_arn) | n/a |
 <!-- END_TF_DOCS -->
