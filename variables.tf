@@ -102,3 +102,15 @@ variable "create_conformance_packs" {
   type    = bool
   default = true
 }
+
+variable "create_iam_role" {
+  description = "Whether to create IAM role and policies"
+  type        = bool
+  default     = true
+}
+
+variable "existing_config_role_arn" {
+  description = "ARN of existing Config role (when create_iam_role = false)"
+  type        = string
+  default     = ""
+}
