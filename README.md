@@ -185,7 +185,7 @@ Example parent directory:
 
 Make sure that 'remote-data.tf' defines the S3 backend which is on the Management account state bucket. For example:
 
-    ```hcl
+   ```hcl
       terraform {
         backend "s3" {
           bucket       = "${var.resource_prefix}-us-gov-west-1-tf-state"
@@ -195,7 +195,7 @@ Make sure that 'remote-data.tf' defines the S3 backend which is on the Managemen
           use_lockfile = true
         }
       }
-    ```
+   ```
 
 6. If AWS Organizations is in scope. Add AWS Config to the service_access_principals. The below example is from the organization directory's main.tf:
    ```hcl
