@@ -50,9 +50,9 @@ module "config" {
 }
 ```
 
-The following example demonstrates a main.tf configuration for clients using AWS Organizations. One of the key differences in this usage block relates to the Delegated Administrator and the aggregation type.
+The following example demonstrates a main.tf configuration for clients using AWS Organizations. One of the key differences in this usage block relates to the delegated administrator and the aggregation type.
 
-A delegated administrator in Config is an AWS account within your organization that is granted the authority to manage Configy on behalf of other accounts. This enables centralized management of Config configuration and monitoring.
+A delegated administrator in Config is an AWS account within your organization that is granted the authority to manage Config on behalf of other accounts. This enables centralized management of Config configuration and monitoring.
 
 Use a delegated administrator when:
   - You manage multiple AWS accounts through AWS Organizations.
@@ -93,7 +93,7 @@ resource "aws_organizations_delegated_administrator" "config" {
   service_principal = "config.amazonaws.com"
 }
 ```
-## Member Account: Use this main.tf in other in-scope client accounts (if applicable). Refer to Deployment steps for more guidance. 
+## Member Account: Use this main.tf for other in-scope client accounts (if applicable). Refer to Deployment steps for more guidance. 
 
 ```hcl
 module "config" {
@@ -159,13 +159,13 @@ SSO-based authentication (via IAM Identity Center SSO):
 
 2. Create a new branch. The branch name should provide a high level overview of what you're working on. 
 
-3. Change directories to the `config` directory. AWS Config needs deployed in each account, thus you must create a `config` direcgtory in each account's directory.
+3. Change directories to the `config` directory. AWS Config needs deployed in each account, thus you must create a `config` directory in each account.
 
 4. Create a properly defined main.tf file via the template found under 'Usage' while adjusting example.auto.tfvars as needed. Note that many provided variables are outputs from other modules. 
 
-IMPORTANT: If a client has a multi-account environment and uses AWS Organizations, ensure that the proper usage block is utilized. 
-    - The Management Account usage block will contain the delegated admin and aggregator setup. 
-    - The Member Account usage block will NOT include the delegated admin setup, conformance packs, or aggregator setup. 
+IMPORTANT: If a client has a multi-account environment and uses AWS Organizations, ensure that the proper usage block is utilized:
+  - The Management Account usage block will contain the delegated admin and aggregator setup. 
+  - The Member Account usage block will NOT include the delegated admin setup, conformance packs, or aggregator setup. 
 
 Example parent directory:
 
@@ -199,22 +199,23 @@ Make sure that 'remote-data.tf' defines the S3 backend which is on the Managemen
 
 6. If AWS Organizations is in scope. Add AWS Config to the service_access_principals. The below example is from the organization directory's main.tf:
    ```hcl
-  service_access_principals = [
-    "cloudtrail.amazonaws.com",
-    "member.org.stacksets.cloudformation.amazonaws.com",
-    "sso.amazonaws.com",
-    "ssm.amazonaws.com",
-    "servicecatalog.amazonaws.com",
-    "guardduty.amazonaws.com",
-    "malware-protection.guardduty.amazonaws.com",
-    "securityhub.amazonaws.com",
-    "ram.amazonaws.com",
-    "tagpolicies.tag.amazonaws.com",
-    "config.amazonaws.com",  # ENGINEER MUST ADD CONFIG SERVICE
-  ]
+    service_access_principals = [
+      "cloudtrail.amazonaws.com",
+      "member.org.stacksets.cloudformation.amazonaws.com",
+      "sso.amazonaws.com",
+      "ssm.amazonaws.com",
+      "servicecatalog.amazonaws.com",
+      "guardduty.amazonaws.com",
+      "malware-protection.guardduty.amazonaws.com",
+      "securityhub.amazonaws.com",
+      "ram.amazonaws.com",
+      "tagpolicies.tag.amazonaws.com",
+      "config.amazonaws.com",  # ENGINEER MUST ADD CONFIG SERVICE
+    ]
    ```
 
 7. From the Management Account's `guardduty` directory run, initialize the Terraform working directory. Reminder: the management account will use the Management Account usage block in the main.tf.
+
    ```hcl
    terraform init
    ```
