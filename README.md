@@ -4,28 +4,35 @@
 
 ## Description
 
-This module creates the necessary resources for AWS Config deployment and configuration.
+This module provisions and configures AWS Config to record resource configurations and compliance across an account or organization. It enables configuration recording, delivery channels, and optional organization-wide setup for centralized compliance management.
 
 ## Dependencies
-- [Account Setup module](https://github.com/Coalfire-CF/terraform-aws-account-setup)
+
+The following modules should already have been applied and configured prior to the deployment steps:
+
+- [Account Setup Module](https://github.com/Coalfire-CF/terraform-aws-account-setup)
+- [AWS Organization Module](https://github.com/Coalfire-CF/terraform-aws-organization)
 
 ## Resource List
-- AWS Config Recorder
-- AWS Config Delivery Channel (S3 + SNS)
-- AWS IAM policies
-- AWS Config Aggregator (Account or Organization)
-- Uploads S3 Object(s) to X bucket for the Config Conformance Packs
-- Config Conformance Packs x2: [Operational-Best-Practices-for-FedRAMP](https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-fedramp-moderate.html) and [Operational-Best-Practices-for-NIST-800-53-rev-5](https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-nist-800-53_rev_5.html) Modified from source [Github](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
-
-## Code Updates
-- Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
-- Due to the nature of this Github repository being opensource there are a few rules out of the box that were removed in order to get this module to properly scan the AWS Accounts
+- AWS Config Recorder – Captures configuration changes for supported AWS resources.
+- AWS Config Delivery Channel – Delivers configuration snapshots and compliance history to S3 and forwards notifications via SNS.
+- AWS IAM policies – Grants Config required permissions for recording and delivery.
+- AWS Config Aggregator – Aggregates configuration and compliance data across accounts and regions (single account or organization).
+- S3 Object Uploads – Deploys conformance pack templates into the designated S3 bucket for reference.
+- Config Conformance Packs – Predefined compliance frameworks:
+    - [Operational-Best-Practices-for-FedRAMP-Moderate](https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-fedramp-moderate.html)
+    - [Operational-Best-Practices-for-NIST-800-53-rev-5](https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-nist-800-53_rev_5.html) 
+    - Refer to Coalfire's locally stored Conformance Packs: [Github](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
+        - Note: Due to the nature of this Github repository being opensource there are a few rules out of the box that were removed in order to get this module to properly scan the AWS Accounts
+        - Please be sure to update AWS Config Rules yaml files from [here](https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs)
 
 ## Usage
 
+The following example illustrates a main.tf configuration for clients not using AWS Organizations, showing how AWS Config can be deployed and managed within a single AWS account environment.
+
 ```hcl
 module "config" {
-  source = "github.com/Coalfire-CF/terraform-aws-config"
+  source = "github.com/Coalfire-CF/terraform-aws-config?ref=v0.0.5"
 
   resource_prefix        = var.resource_prefix
   s3_config_arn          = data.terraform_remote_state.mgmt_account_setup.outputs.s3_config_arn
@@ -39,8 +46,83 @@ module "config" {
   ## Aggregator 
   aws_regions      = var.aws_regions
   account_ids      = local.share_accounts
-  aggregation_type = "organization"
+  aggregation_type = "account"
 }
+```
+
+The following example demonstrates a main.tf configuration for clients using AWS Organizations. One of the key differences in this usage block relates to the Delegated Administrator and the aggregation type.
+
+A delegated administrator in Config is an AWS account within your organization that is granted the authority to manage Configy on behalf of other accounts. This enables centralized management of Config configuration and monitoring.
+
+Use a delegated administrator when:
+  - You manage multiple AWS accounts through AWS Organizations.
+  - You want a single account (often a management or security account) to handle Config setup and configurations for all member accounts.
+  - You want to avoid deploying and maintaining Config in every account individually.
+
+## Management Account: Use this main.tf in the Management Account. Refer to Deployment steps for more guidance. 
+
+```hcl
+module "config" {
+  source = "github.com/Coalfire-CF/terraform-aws-config?ref=v0.0.5"
+
+  providers = {
+    aws = aws.prefix-mgmt
+  }
+
+  resource_prefix        = var.resource_prefix
+  is_gov                 = var.is_gov
+  s3_config_arn          = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_config_arn
+  s3_config_id           = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_config_id
+  config_kms_key_arn     = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.config_kms_key_arn
+  s3_kms_key_arn         = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_kms_key_arn
+  sns_kms_key_id         = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.sns_kms_key_id
+  conformance_pack_names = ["Operational-Best-Practices-for-FedRAMP", "Operational-Best-Practices-for-NIST-800-53-rev-5"]
+  delivery_frequency     = "TwentyFour_Hours"
+
+  ## Aggregator 
+  aws_regions      = var.aws_regions
+  account_ids      = local.share_accounts
+  aggregation_type = "organization"
+
+  depends_on = [aws_organizations_delegated_administrator.config]
+}
+
+resource "aws_organizations_delegated_administrator" "config" {  
+  provider = aws.prefix-org
+  account_id        = local.mgmt_plane_account_id
+  service_principal = "config.amazonaws.com"
+}
+```
+## Member Account: Use this main.tf in other in-scope client accounts (if applicable). Refer to Deployment steps for more guidance. 
+
+```hcl
+module "config" {
+  source = "github.com/Coalfire-CF/terraform-aws-config?ref=v0.0.5"
+
+  providers = {
+    aws = aws.prefix-org
+  }
+
+  resource_prefix        = var.resource_prefix
+  is_gov                 = var.is_gov
+  s3_config_arn          = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_config_arn
+  s3_config_id           = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_config_id
+  config_kms_key_arn     = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.config_kms_key_arn
+  s3_kms_key_arn         = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.s3_kms_key_arn
+  sns_kms_key_id         = data.terraform_remote_state.fedramp_mgmt_account_setup.outputs.sns_kms_key_id
+  delivery_frequency     = "TwentyFour_Hours"
+
+  # Conformance paks are only created in the delegated admin account
+  upload_conformance_objects = false
+  create_conformance_packs   = false
+  conformance_pack_names = ["Operational-Best-Practices-for-FedRAMP", "Operational-Best-Practices-for-NIST-800-53-rev-5"]
+ 
+  ## Aggregator 
+  aws_regions      = var.aws_regions
+  account_ids      = local.share_accounts
+  aggregation_type = "none"
+}
+
 ```
 
 ## Environment Setup
@@ -75,11 +157,22 @@ SSO-based authentication (via IAM Identity Center SSO):
     ../{CLOUD}/terraform/{REGION}/{ACCOUNT_TYPE}-mgmt-account/example
     ```
 
-2. Create a properly defined main.tf file via the template found under 'Usage' while adjusting auto.tfvars as needed. Note that many provided variables are outputs from other modules. Example parent directory:
+2. Create a new branch. The branch name should provide a high level overview of what you're working on. 
+
+3. Change directories to the `config` directory. AWS Config needs deployed in each account, thus you must create a `config` direcgtory in each account's directory.
+
+4. Create a properly defined main.tf file via the template found under 'Usage' while adjusting example.auto.tfvars as needed. Note that many provided variables are outputs from other modules. 
+
+IMPORTANT: If a client has a multi-account environment and uses AWS Organizations, ensure that the proper usage block is utilized. 
+    - The Management Account usage block will contain the delegated admin and aggregator setup. 
+    - The Member Account usage block will NOT include the delegated admin setup, conformance packs, or aggregator setup. 
+
+Example parent directory:
 
    ```hcl
    ├── Example/
-   │   ├── example.auto.tfvars   
+   │   ├── example.auto.tfvars
+   │   ├── locals.tf  
    │   ├── main.tf
    │   ├── outputs.tf
    │   ├── providers.tf
@@ -88,7 +181,9 @@ SSO-based authentication (via IAM Identity Center SSO):
    │   ├── variables.tf
    │   ├── ...
    ```
-   Make sure that 'remote-data.tf' defines the S3 backend which is on the Management account state bucket. For example:
+5. Customize code to meet requirements. 
+
+Make sure that 'remote-data.tf' defines the S3 backend which is on the Management account state bucket. For example:
 
     ```hcl
     terraform {
@@ -102,18 +197,44 @@ SSO-based authentication (via IAM Identity Center SSO):
     }
     ```
 
-3. Initialize the Terraform working directory:
+6. If AWS Organizations is in scope. Add AWS Config to the service_access_principals. The below example is from the organization directory's main.tf:
+   ```hcl
+  service_access_principals = [
+    "cloudtrail.amazonaws.com",
+    "member.org.stacksets.cloudformation.amazonaws.com",
+    "sso.amazonaws.com",
+    "ssm.amazonaws.com",
+    "servicecatalog.amazonaws.com",
+    "guardduty.amazonaws.com",
+    "malware-protection.guardduty.amazonaws.com",
+    "securityhub.amazonaws.com",
+    "ram.amazonaws.com",
+    "tagpolicies.tag.amazonaws.com",
+    "config.amazonaws.com",  # ENGINEER MUST ADD CONFIG SERVICE
+  ]
+   ```
+
+7. From the Management Account's `guardduty` directory run, initialize the Terraform working directory. Reminder: the management account will use the Management Account usage block in the main.tf.
    ```hcl
    terraform init
    ```
-   Create an execution plan and verify the resources being created:
+
+8. Create an execution plan and verify the resources being created:
    ```hcl
    terraform plan
    ```
-   Apply the configuration:
+
+9. Apply the configuration:
    ```hcl
    terraform apply
    ```
+
+10. If applicable, repeat Steps 7-9 within each account. This will deploy AWS Config in each account. Reminder: these accounts will use the Member Account usage block in the main.tf.
+
+## Post Deployment Validation
+1. Navigate to the AWS Console > Config within each account > Settings. Confirm that Config is enabled. 
+2. Navigate to the AWS Console > Config within the Management Account > Conformance Packs. Ensure the desired packs are showing.
+3. Navigate to the AWS Console > Config within the Management Account > Aggregators. Ensure you can see multiple accounts under "Accounts by X" dashboard sections.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
