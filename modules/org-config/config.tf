@@ -1,4 +1,6 @@
 resource "aws_config_configuration_recorder" "config" {
+  provider = aws.mgmt
+
   name     = "${var.resource_prefix}-config"
   role_arn = aws_iam_role.custom_aws_config_role.arn
 
@@ -10,12 +12,16 @@ resource "aws_config_configuration_recorder" "config" {
 }
 
 resource "aws_sns_topic" "config_delivery" {
+  provider = aws.mgmt
+
   count             = data.aws_region.current.name == "us-gov-west-1" ? 1 : 0
   name              = "${var.resource_prefix}-sns-config"
   kms_master_key_id = var.sns_kms_key_id
 }
 
 resource "aws_config_delivery_channel" "config" {
+  provider = aws.mgmt
+
   name           = "${var.resource_prefix}-config-delivery-${data.aws_region.current.name}"
   s3_bucket_name = var.s3_config_id
   sns_topic_arn  = length(aws_sns_topic.config_delivery) > 0 ? aws_sns_topic.config_delivery[0].arn : null
@@ -27,6 +33,8 @@ resource "aws_config_delivery_channel" "config" {
 }
 
 resource "aws_config_configuration_recorder_status" "config" {
+  provider = aws.mgmt
+
   name       = aws_config_configuration_recorder.config.name
   is_enabled = true
 
@@ -35,6 +43,8 @@ resource "aws_config_configuration_recorder_status" "config" {
 
 resource "aws_config_organization_conformance_pack" "conformance_packs" {
   count = var.create_conformance_packs ? length(var.conformance_pack_names) : 0
+
+  provider = aws.org_root
 
   name               = var.conformance_pack_names[count.index]
   delivery_s3_bucket = var.s3_config_id
