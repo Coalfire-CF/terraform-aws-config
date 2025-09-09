@@ -47,7 +47,7 @@ resource "aws_config_organization_conformance_pack" "conformance_packs" {
   count = var.create_conformance_packs && var.is_org ? length(var.conformance_pack_names) : 0
 
   name               = var.conformance_pack_names[count.index]
-  delivery_s3_bucket = var.s3_config_id
+  delivery_s3_bucket = var.s3_config_conform_id
   template_s3_uri    = "s3://${var.s3_config_id}/${var.packs_s3_key}/${var.conformance_pack_names[count.index]}.yaml"
 
   depends_on = [aws_s3_object.fedramp, aws_s3_object.nist]

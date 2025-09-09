@@ -48,6 +48,12 @@ variable "s3_config_id" {
   type        = string
 }
 
+variable "s3_config_conform_id" {
+  description = "S3 bucket ID for AWS Config Conformance Packs. Only needed if deploying Organization Conformance Packs"
+  type        = string
+  default     = null
+}
+
 variable "packs_s3_key" {
   description = "S3 Bucket prefix for the Packs uploaded"
   type        = string
