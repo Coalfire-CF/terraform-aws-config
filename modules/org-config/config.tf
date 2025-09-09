@@ -8,7 +8,6 @@ resource "aws_config_configuration_recorder" "config" {
     all_supported                 = true
     include_global_resource_types = true
   }
-  
 }
 
 resource "aws_sns_topic" "config_delivery" {
@@ -29,7 +28,6 @@ resource "aws_config_delivery_channel" "config" {
   snapshot_delivery_properties {
     delivery_frequency = var.delivery_frequency
   }
-
 }
 
 resource "aws_config_configuration_recorder_status" "config" {
