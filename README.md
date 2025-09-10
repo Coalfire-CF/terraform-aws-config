@@ -27,9 +27,11 @@ This module creates the necessary resources for AWS Config deployment and config
 module "config" {
   source = "github.com/Coalfire-CF/terraform-aws-config"
 
+  is_gov                 = var.is_gov
   resource_prefix        = var.resource_prefix
   s3_config_arn          = data.terraform_remote_state.mgmt_account_setup.outputs.s3_config_arn
   s3_config_id           = data.terraform_remote_state.mgmt_account_setup.outputs.s3_config_id
+  s3_config_conform_id   = data.terraform_remote_state.account-setup.outputs.s3_config_conformance_pack_id
   config_kms_key_arn     = data.terraform_remote_state.mgmt_account_setup.outputs.config_kms_key_arn
   s3_kms_key_arn         = data.terraform_remote_state.mgmt_account_setup.outputs.s3_kms_key_arn
   sns_kms_key_id         = data.terraform_remote_state.mgmt_account_setup.outputs.sns_kms_key_id

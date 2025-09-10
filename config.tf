@@ -6,7 +6,6 @@ resource "aws_config_configuration_recorder" "config" {
     all_supported                 = true
     include_global_resource_types = true
   }
-  
 }
 
 resource "aws_sns_topic" "config_delivery" {
@@ -23,7 +22,6 @@ resource "aws_config_delivery_channel" "config" {
   snapshot_delivery_properties {
     delivery_frequency = var.delivery_frequency
   }
-
 }
 
 resource "aws_config_configuration_recorder_status" "config" {
@@ -57,9 +55,12 @@ resource "aws_config_organization_conformance_pack" "conformance_packs" {
   delivery_s3_bucket = var.s3_config_conform_id
   template_s3_uri    = "s3://awsconfigconforms-${var.resource_prefix}-${data.aws_region.current.name}/${var.packs_s3_key}/${var.conformance_pack_names[count.index]}.yaml"
   depends_on = [aws_s3_object.fedramp, aws_s3_object.nist]
+  excluded_accounts = [""]
+
 
   lifecycle {
     ignore_changes = [
+      excluded_accounts,
       arn,
       id
     ]
