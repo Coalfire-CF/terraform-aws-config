@@ -45,7 +45,8 @@ resource "aws_config_conformance_pack" "conformance_packs" {
   lifecycle {
     ignore_changes = [
       arn,
-      id
+      id,
+      excluded_accounts
     ]
   }
 }
@@ -62,7 +63,8 @@ resource "aws_config_organization_conformance_pack" "conformance_packs" {
   lifecycle {
     ignore_changes = [
       arn,
-      id
+      id,
+      excluded_accounts
     ]
   }
 }
