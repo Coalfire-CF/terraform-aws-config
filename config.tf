@@ -41,6 +41,13 @@ resource "aws_config_conformance_pack" "conformance_packs" {
   template_s3_uri    = "s3://${var.s3_config_id}/${var.packs_s3_key}/${var.conformance_pack_names[count.index]}.yaml"
 
   depends_on = [aws_s3_object.fedramp, aws_s3_object.nist]
+
+  lifecycle {
+    ignore_changes = [
+      arn,
+      id
+    ]
+  }
 }
 
 resource "aws_config_organization_conformance_pack" "conformance_packs" {
@@ -51,4 +58,11 @@ resource "aws_config_organization_conformance_pack" "conformance_packs" {
   template_s3_uri    = "s3://awsconfigconforms-${var.resource_prefix}-${data.aws_region.current.name}/${var.packs_s3_key}/${var.conformance_pack_names[count.index]}.yaml"
 
   depends_on = [aws_s3_object.fedramp, aws_s3_object.nist]
+
+  lifecycle {
+    ignore_changes = [
+      arn,
+      id
+    ]
+  }
 }
