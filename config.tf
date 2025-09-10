@@ -45,8 +45,7 @@ resource "aws_config_conformance_pack" "conformance_packs" {
   lifecycle {
     ignore_changes = [
       arn,
-      id,
-      excluded_accounts
+      id
     ]
   }
 }
