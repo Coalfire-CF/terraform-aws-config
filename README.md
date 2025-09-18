@@ -8,6 +8,26 @@ This module creates the necessary resources for AWS Config deployment and config
 
 ## Dependencies
 - [Account Setup module](https://github.com/Coalfire-CF/terraform-aws-account-setup)
+- [OrganizationAccountAccessRole created in delegate-admin account](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create-cross-account-role.html)
+  In order for you to deploy config to the non-delegate admin accounts, they will need to be able to access the state bucket in the delegate-admin account:
+  ```hcl
+  data "terraform_remote_state" "fedramp_mgmt_account_setup" {
+  backend   = "s3"
+  workspace = "default"
+
+  config = {
+    bucket  = "${var.resource_prefix}-${var.aws_region}-tf-state"
+    region  = var.aws_region
+    key     = "${var.resource_prefix}/${var.aws_region}/account-setup.tfstate"
+    profile = var.profile
+
+    assume_role = {
+      role_arn     = "arn:aws-us-gov:iam::${local.mgmt_plane_account_id}:role/OrganizationAccountAccessRole"
+      session_name = "tf-state-access"
+    }
+  }
+}
+```
 
 ## Resource List
 - AWS Config Recorder
