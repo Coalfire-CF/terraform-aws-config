@@ -1,8 +1,13 @@
 name: Org Terraform Docs
+
 on:
-    pull_request:
-    workflow_call:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: write       # allow commits
+  pull-requests: write  # allow updating PRs if needed
 
 jobs:
   terraform-docs:
-    uses: Coalfire-CF/Actions/.github/workflows/org-terraform-docs.yml@main
+    uses: Coalfire-CF/Actions/.github/workflows/org-terraform-docs.yml@v0.1.0
