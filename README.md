@@ -349,3 +349,25 @@ No modules.
 ### Copyright
 
 Copyright © 2023 Coalfire Systems Inc.
+
+## Tree
+```
+.
+|-- CONTRIBUTING.md
+|-- LICENSE
+|-- License.md
+|-- README.md
+|-- coalfire_logo.png
+|-- config-aggregator.tf
+|-- config.tf
+|-- data.tf
+|-- iam.tf
+|-- outputs.tf
+|-- providers.tf
+|-- release-please-config.json
+|-- s3-aws-config-files
+|   |-- Operational-Best-Practices-for-FedRAMP.yaml
+|   |-- Operational-Best-Practices-for-NIST-800-53-rev-5.yaml
+|-- s3-objects.tf
+|-- variables.tf
+```
