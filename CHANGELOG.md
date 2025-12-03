@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.1](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.1.0...v0.1.1) (2025-11-17)
+
+
+### Miscellaneous
+
+* remove old LICENSE file ([619e9b4](https://github.com/Coalfire-CF/terraform-aws-config/commit/619e9b4e0cddc9bc4df9c88d37690dc8b8747917))
+* remove old LICENSE file ([65255b6](https://github.com/Coalfire-CF/terraform-aws-config/commit/65255b647892f11077c629d27fab23addb9b0df9))
+* update README tree ([e192981](https://github.com/Coalfire-CF/terraform-aws-config/commit/e1929812935dc95b1152388043c0fae9550ca3d4))
+
 ## [0.1.0](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.0.5...v0.1.0) (2025-10-24)
 
 
