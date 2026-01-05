@@ -134,8 +134,6 @@ module "config" {
   delivery_frequency     = "TwentyFour_Hours"
 
   # Conformance paks are only created in the delegated admin account
-  upload_conformance_objects = false
-  create_conformance_packs   = false
   conformance_pack_names = ["Operational-Best-Practices-for-FedRAMP", "Operational-Best-Practices-for-NIST-800-53-rev-5"]
  
   ## Aggregator 
