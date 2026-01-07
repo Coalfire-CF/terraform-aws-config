@@ -53,7 +53,7 @@ The following example illustrates a main.tf configuration for clients not using 
 
 ```hcl
 module "config" {
-  source = "github.com/Coalfire-CF/terraform-aws-config?ref=v0.0.5"
+  source = "github.com/Coalfire-CF/terraform-aws-config?ref=vX.X.X"
 
   resource_prefix        = var.resource_prefix
   s3_config_arn          = data.terraform_remote_state.mgmt_account_setup.outputs.s3_config_arn
@@ -84,7 +84,7 @@ Use a delegated administrator when:
 
 ```hcl
 module "config" {
-  source = "github.com/Coalfire-CF/terraform-aws-config?ref=v0.0.5"
+  source = "github.com/Coalfire-CF/terraform-aws-config?ref=vX.X.X"
 
   providers = {
     aws = aws.prefix-mgmt
@@ -118,7 +118,7 @@ resource "aws_organizations_delegated_administrator" "config" {
 
 ```hcl
 module "config" {
-  source = "github.com/Coalfire-CF/terraform-aws-config?ref=v0.0.5"
+  source = "github.com/Coalfire-CF/terraform-aws-config?ref=vX.X.X"
 
   providers = {
     aws = aws.prefix-org
@@ -134,8 +134,6 @@ module "config" {
   delivery_frequency     = "TwentyFour_Hours"
 
   # Conformance paks are only created in the delegated admin account
-  upload_conformance_objects = false
-  create_conformance_packs   = false
   conformance_pack_names = ["Operational-Best-Practices-for-FedRAMP", "Operational-Best-Practices-for-NIST-800-53-rev-5"]
  
   ## Aggregator 

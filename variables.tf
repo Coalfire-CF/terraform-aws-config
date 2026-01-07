@@ -84,9 +84,10 @@ variable "aggregation_type" {
   description = "Aggregation Type"
   type        = string
   validation {
-    condition = contains([
-      "account", "organization"
-    ], var.aggregation_type)
-    error_message = "Valid values for var: account or organization."
+    condition = contains(
+      ["account", "organization", "none"],
+      var.aggregation_type
+    )
+    error_message = "Valid values are: account, organization, or none."
   }
 }
