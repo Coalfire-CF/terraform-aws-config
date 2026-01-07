@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.2](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.1.1...v0.1.2) (2026-01-07)
+
+
+### Miscellaneous
+
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-checkov.yml ([3d57da9](https://github.com/Coalfire-CF/terraform-aws-config/commit/3d57da9ee023e9ff6882463d404ed42a58a7ab77))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-checkov.yml from 0.1.0 to 0.1.1 ([1c15d27](https://github.com/Coalfire-CF/terraform-aws-config/commit/1c15d27d4f7e01c079f77a90c4646e3d30da4725))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-dependabot.yml ([5ada72b](https://github.com/Coalfire-CF/terraform-aws-config/commit/5ada72b555d6de931b2a356327ce92026a76ea55))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-dependabot.yml from 0.1.0 to 0.1.1 ([11d3efc](https://github.com/Coalfire-CF/terraform-aws-config/commit/11d3efc383cf50a13548ebdd352503807f88c9ac))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-release.yml ([3c7f2ea](https://github.com/Coalfire-CF/terraform-aws-config/commit/3c7f2eabd2379fd42cca9b734779f136fd9617b6))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-release.yml from 0.1.0 to 0.1.1 ([363a345](https://github.com/Coalfire-CF/terraform-aws-config/commit/363a34501c1dbe493e69fc1ff6fb7e1c655e2f4a))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-fmt.yml ([66cf955](https://github.com/Coalfire-CF/terraform-aws-config/commit/66cf9559ccfa9174663f1165ffe1e83dd6ddfa5c))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-fmt.yml from 0.1.0 to 0.1.1 ([063797e](https://github.com/Coalfire-CF/terraform-aws-config/commit/063797ed739945a2e66f267654069fc13a6f49c4))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-tree-readme.yml ([78c2483](https://github.com/Coalfire-CF/terraform-aws-config/commit/78c2483d348d00da2e594b7ec0fad1d3ed503a7c))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-tree-readme.yml from 0.1.0 to 0.1.1 ([b6bb293](https://github.com/Coalfire-CF/terraform-aws-config/commit/b6bb293949d1172bf129aaf3090d6d69cd0fc2ac))
+
 ## [0.1.1](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.1.0...v0.1.1) (2025-11-17)
 
 
