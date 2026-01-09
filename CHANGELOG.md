@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.3](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.1.2...v0.1.3) (2026-01-08)
+
+
+### Bug Fixes
+
+* license year ([5306014](https://github.com/Coalfire-CF/terraform-aws-config/commit/5306014e8941bf6e2a987464e464cd97dbef15cc))
+* update license year to 2026 ([4d19af2](https://github.com/Coalfire-CF/terraform-aws-config/commit/4d19af2288fb6ed3b36df5a41a64f76d05509b73))
+
+
+### Miscellaneous
+
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-markdown-lint.yml ([c9a9246](https://github.com/Coalfire-CF/terraform-aws-config/commit/c9a924642e5f79175d507fe766bd8e5e1306451b))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-markdown-lint.yml from 0.1.0 to 0.1.1 ([3af498b](https://github.com/Coalfire-CF/terraform-aws-config/commit/3af498b4474e495fa2967f88af032ecbcb684471))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-docs.yml ([cc4c436](https://github.com/Coalfire-CF/terraform-aws-config/commit/cc4c436b7bacdf8a01a7177140f18e8d6288736f))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-docs.yml from 0.1.0 to 0.1.1 ([c889f86](https://github.com/Coalfire-CF/terraform-aws-config/commit/c889f86204f869651a5c99d9a4204f5e358df991))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-validate.yml ([034e9f1](https://github.com/Coalfire-CF/terraform-aws-config/commit/034e9f1dd10ecbef4413b04debe639f4a08d1d87))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-validate.yml from 0.1.0 to 0.1.1 ([add74c3](https://github.com/Coalfire-CF/terraform-aws-config/commit/add74c38a6f614926d509ef3dea53e0c8694aea4))
+
 ## [0.1.2](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.1.1...v0.1.2) (2026-01-07)
 
 
