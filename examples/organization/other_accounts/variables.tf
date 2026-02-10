@@ -22,7 +22,7 @@ variable "aws_region" {
 variable "aws_regions" {
   description = "The AWS region to create resources in."
   type        = list(string)
-  default     = ["us-gov-west-1", "us-gov-east-1"] #confirm east?
+  default     = ["us-gov-west-1", "us-gov-east-1"]
 }
 
 variable "upload_conformance_objects" {

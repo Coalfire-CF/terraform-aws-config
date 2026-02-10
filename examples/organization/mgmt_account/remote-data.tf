@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket       = "client-mgmt-us-gov-west-1-tf-state" # Update to point to management plane TF State bucket
     region       = "us-gov-west-1"
-    key          = "client-aws-tgw/us-gov-west-1/aws-config.tfstate" # May need to update path to correctly point to management plane > root account tfstate bucket
+    key          = "client-aws-mgmt/us-gov-west-1/aws-config.tfstate" # May need to update path to correctly point to management plane tfstate bucket
     encrypt      = true
     use_lockfile = true
   }
