@@ -359,6 +359,22 @@ Copyright © 2023 Coalfire Systems Inc.
 |-- config-aggregator.tf
 |-- config.tf
 |-- data.tf
+|-- examples
+|   |-- organization
+|       |-- mgmt_account
+|       |   |-- example.auto.tfvars
+|       |   |-- locals.tf
+|       |   |-- main.tf
+|       |   |-- providers.tf
+|       |   |-- remote-data.tf
+|       |   |-- variables.tf
+|       |-- other_accounts
+|           |-- example.auto.tfvars
+|           |-- locals.tf
+|           |-- main.tf
+|           |-- providers.tf
+|           |-- remote-data.tf
+|           |-- variables.tf
 |-- iam.tf
 |-- outputs.tf
 |-- providers.tf
