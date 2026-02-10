@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.4](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.1.3...v0.1.4) (2026-02-09)
+
+
+### Miscellaneous
+
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-checkov.yml ([8ba4d55](https://github.com/Coalfire-CF/terraform-aws-config/commit/8ba4d5579d845f98916c6647389f5c282375addb))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-checkov.yml from 0.2.2 to 0.2.4 ([ed5e955](https://github.com/Coalfire-CF/terraform-aws-config/commit/ed5e9553f2c9a9422fb67cf0d2bf9fc41cedf9c6))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-dependabot.yml ([0c5984a](https://github.com/Coalfire-CF/terraform-aws-config/commit/0c5984aeb20d4214bac4d21cb9c3108548099862))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-dependabot.yml from 0.2.2 to 0.2.4 ([ae7d007](https://github.com/Coalfire-CF/terraform-aws-config/commit/ae7d00778aa9df22fd928d1397664784d0549b72))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-markdown-lint.yml from 0.2.1 to 0.2.4 ([65cf65f](https://github.com/Coalfire-CF/terraform-aws-config/commit/65cf65f3af8c844a0d91c2bc1a4cc7867be1e984))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-docs.yml from 0.2.1 to 0.2.4 ([d37ce82](https://github.com/Coalfire-CF/terraform-aws-config/commit/d37ce82633fffad5b819a3d0684e80c30a91d8cb))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-fmt.yml from 0.2.1 to 0.2.4 ([90f1c4d](https://github.com/Coalfire-CF/terraform-aws-config/commit/90f1c4d75575cd79105f5d7cc435e266be8c5250))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-validate.yml ([80f934e](https://github.com/Coalfire-CF/terraform-aws-config/commit/80f934e8e8ce6a2e846fca8b7ad230da64dba183))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-terraform-validate.yml from 0.2.2 to 0.2.4 ([7ccbfc6](https://github.com/Coalfire-CF/terraform-aws-config/commit/7ccbfc623066609150b00e5bcc6d34395cb18d1e))
+* **deps:** bump Coalfire-CF/Actions/.github/workflows/org-tree-readme.yml from 0.2.1 to 0.2.4 ([2887a4e](https://github.com/Coalfire-CF/terraform-aws-config/commit/2887a4eb3f85bbd430611b7248bd0c99b723b187))
+
 ## [0.1.3](https://github.com/Coalfire-CF/terraform-aws-config/compare/v0.1.2...v0.1.3) (2026-02-06)
 
 
