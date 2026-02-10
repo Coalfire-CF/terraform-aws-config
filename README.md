@@ -9,6 +9,7 @@ This module provisions and configures AWS Config to record resource configuratio
 ## Dependencies
 - [Account Setup module](https://github.com/Coalfire-CF/terraform-aws-account-setup)
 - [OrganizationAccountAccessRole created in delegate-admin account](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create-cross-account-role.html)
+
   In order for you to deploy config to the non-delegate admin accounts, they will need to be able to access the state bucket in the delegate-admin account:
   ```hcl
   data "terraform_remote_state" "fedramp_mgmt_account_setup" {
@@ -19,7 +20,6 @@ This module provisions and configures AWS Config to record resource configuratio
     bucket  = "${var.resource_prefix}-${var.aws_region}-tf-state"
     region  = var.aws_region
     key     = "${var.resource_prefix}/${var.aws_region}/account-setup.tfstate"
-    profile = var.profile
 
     assume_role = {
       role_arn     = "arn:aws-us-gov:iam::${local.mgmt_plane_account_id}:role/OrganizationAccountAccessRole"
@@ -359,6 +359,22 @@ Copyright © 2023 Coalfire Systems Inc.
 |-- config-aggregator.tf
 |-- config.tf
 |-- data.tf
+|-- examples
+|   |-- organization
+|       |-- mgmt_account
+|       |   |-- example.auto.tfvars
+|       |   |-- locals.tf
+|       |   |-- main.tf
+|       |   |-- providers.tf
+|       |   |-- remote-data.tf
+|       |   |-- variables.tf
+|       |-- other_accounts
+|           |-- example.auto.tfvars
+|           |-- locals.tf
+|           |-- main.tf
+|           |-- providers.tf
+|           |-- remote-data.tf
+|           |-- variables.tf
 |-- iam.tf
 |-- outputs.tf
 |-- providers.tf
