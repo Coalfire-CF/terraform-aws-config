@@ -17,3 +17,17 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+  - package-ecosystem: "terraform"
+    directory: "/examples/organization/mgmt_account"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+  - package-ecosystem: "terraform"
+    directory: "/examples/organization/other_accounts"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "chore"
+      include: "scope"

@@ -1,5 +1,5 @@
 module "config" {
-  source = "github.com/Coalfire-CF/terraform-aws-config?ref=vX.X.X"
+  source = "git::https://github.com/Coalfire-CF/terraform-aws-config?ref=vX.X.X"
 
   providers = {
     aws = aws.mgmt
