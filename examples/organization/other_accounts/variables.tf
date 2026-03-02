@@ -22,7 +22,7 @@ variable "aws_region" {
 variable "aws_regions" {
   description = "The AWS region to create resources in."
   type        = list(string)
-  default     = ["us-gov-west-1", "us-gov-east-1"]
+  default     = ["us-gov-west-1"]
 }
 
 variable "upload_conformance_objects" {
@@ -35,9 +35,4 @@ variable "create_conformance_packs" {
   description = "Determines whether or not to cerate the conformance paks. False if deploying aws-config to single, non-delegated admin account."
   type        = bool
   default     = true
-}
-
-variable "gov_cloud_organization_id" {
-  description = "AWS Gov Cloud Organization ID"
-  type        = string
 }
