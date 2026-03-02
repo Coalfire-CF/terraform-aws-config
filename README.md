@@ -357,7 +357,6 @@ Copyright © 2023 Coalfire Systems Inc.
 |-- README.md
 |-- coalfire_logo.png
 |-- config-aggregator.tf
-|-- config.tf
 |-- data.tf
 |-- examples
 |   |-- organization
@@ -376,9 +375,10 @@ Copyright © 2023 Coalfire Systems Inc.
 |           |-- remote-data.tf
 |           |-- variables.tf
 |-- iam.tf
+|-- main.tf
 |-- outputs.tf
-|-- providers.tf
 |-- release-please-config.json
+|-- required_providers.tf
 |-- s3-aws-config-files
 |   |-- Operational-Best-Practices-for-FedRAMP.yaml
 |   |-- Operational-Best-Practices-for-NIST-800-53-rev-5.yaml
