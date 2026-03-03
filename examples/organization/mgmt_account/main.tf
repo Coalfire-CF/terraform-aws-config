@@ -24,7 +24,7 @@ module "config" {
 }
 
 resource "aws_organizations_delegated_administrator" "config" {
-  provider          = aws.mf-aws-root
+  provider          = aws.root
   account_id        = local.mgmt_plane_account_id
   service_principal = "config.amazonaws.com"
 }

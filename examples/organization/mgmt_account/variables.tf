@@ -36,8 +36,3 @@ variable "create_conformance_packs" {
   type        = bool
   default     = true
 }
-
-variable "gov_cloud_organization_id" {
-  description = "AWS Gov Cloud Organization ID"
-  type        = string
-}
