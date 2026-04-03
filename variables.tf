@@ -74,12 +74,23 @@ variable "delivery_frequency" {
   }
 }
 
-variable "conformance_pack_names" {
-  description = "A list of conformance pack names to be deployed"
-  type        = list(string)
+variable "fedramp_level" {
+  description = "FedRAMP authorization level to deploy conformance packs for"
+  type        = string
+  default     = "moderate"
+
+  validation {
+    condition     = contains(["moderate", "high"], var.fedramp_level)
+    error_message = "Valid values are: moderate or high."
+  }
 }
 
-## Aggregator Variables ##
+variable "additional_conformance_packs" {
+  description = "Optional additional conformance pack names to deploy beyond FedRAMP and NIST defaults. Names must match the YAML filenames in s3-aws-config-files/ (without the .yaml extension)."
+  type        = list(string)
+  default     = []
+}
+
 variable "aggregation_type" {
   description = "Aggregation Type"
   type        = string
